@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b2a54">
+    <title>Oferta Académica | CONEST - Facultad de Ciencias UCV</title>
+    <link rel="shortcut icon"
+        href="https://conest.ciens.ucv.ve/webapp/assets/favicon-d1342303b1597732c8c607134e460ddd.ico"
+        type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="app-layout">
+        <header class="app-header">
+            <div class="header-container">
+                <div class="brand-section">
+                    <a href="landing.html" class="brand-logo" aria-label="Inicio CONEST">
+                        <img src="conest original/CONEST - Sistema de gestión académica - Inicio_files/logo_conest-1d67698e7884dfb1c74c9485c77f00cc.png"
+                            alt="Logo CONEST" class="img-logo-conest">
+                    </a>
+                    <div class="brand-titles">
+                        <h1 class="portal-title">CONEST</h1>
+                        <p class="portal-subtitle">Sistema de Gestión Académica • Facultad de Ciencias</p>
+                    </div>
+                </div>
+                <div class="institutional-section">
+                    <div class="institutional-links" aria-label="Enlaces institucionales">
+                        <a href="http://www.ucv.ve/" target="_blank" rel="noopener noreferrer">Universidad Central de
+                            Venezuela</a>
+                        <span class="link-separator" aria-hidden="true">|</span>
+                        <a href="http://www.ciens.ucv.ve/" target="_blank" rel="noopener noreferrer">Facultad de
+                            Ciencias</a>
+                    </div>
+                    <div class="institutional-logos">
+                        <a href="http://www.ucv.ve/" target="_blank" rel="noopener noreferrer"
+                            title="Universidad Central de Venezuela"><img
+                                src="conest original/CONEST - Sistema de gestión académica - Inicio_files/logo_ucv-2b9dff9ff94eaf41cfddfd7611358aaa.png"
+                                alt="Escudo UCV" class="img-logo-ucv"></a>
+                        <a href="http://www.ciens.ucv.ve/" target="_blank" rel="noopener noreferrer"
+                            title="Facultad de Ciencias UCV"><img
+                                src="conest original/CONEST - Sistema de gestión académica - Inicio_files/logo_ciencias-5bbdf16cb5e7e07aaff3c830599be698.png"
+                                alt="Logo Facultad de Ciencias" class="img-logo-ciencias"></a>
+                    </div>
+                </div>
+            </div>
+            <nav class="main-nav" aria-label="Menú principal">
+                <div class="nav-container">
+                    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false"
+                        aria-controls="primaryNavList" aria-label="Abrir menú de navegación">
+                        <span class="hamburger-box"><span class="hamburger-inner"></span></span><span
+                            class="nav-toggle-text">Menú</span>
+                    </button>
+                    <ul class="nav-list" id="primaryNavList">
+                        <li class="nav-item"><a class="nav-link" href="landing.html" aria-current="page">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="https://conest.ciens.ucv.ve/webapp/docente/historial">Historial Académico</a></li>
+                        <li class="nav-item has-dropdown">
+                            <button class="nav-link dropdown-toggle" type="button"
+                                aria-expanded="false"><span>Procesos</span><svg class="chevron-icon" width="12"
+                                    height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg></button>
+                            <ul class="dropdown-menu">
+                                <li><a
+                                        href="https://conest.ciens.ucv.ve/webapp/oferta_academica/carrera?carrera_id=C&amp;periodo_id=01-2026&amp;semestre_actual=1">Planificación
+                                        del Semestre (01-2026)</a></li>
+                                <li><a
+                                        href="https://conest.ciens.ucv.ve/webapp/oferta_academica/detalle_preinscritos?carrera_id=C&amp;periodo_id=1-2026">Preinscripción
+                                        del Semestre (1-2026)</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-dropdown">
+                            <button class="nav-link dropdown-toggle" type="button"
+                                aria-expanded="false"><span>Estudiantes</span><svg class="chevron-icon" width="12"
+                                    height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg></button>
+                            <ul class="dropdown-menu">
+                                <li><a
+                                        href="https://conest.ciens.ucv.ve/webapp/principal_docente/seleccionar_estudiante">Consultar
+                                        Historial Académico</a></li>
+                                <li><a
+                                        href="https://conest.ciens.ucv.ve/webapp/principal_docente/disponibilidad_seccion?materia=6002">Horarios
+                                        Libres por Sección</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-dropdown">
+                            <button class="nav-link dropdown-toggle" type="button"
+                                aria-expanded="false"><span>Solicitudes</span><svg class="chevron-icon" width="12"
+                                    height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://conest.ciens.ucv.ve/webapp/solicitud_jurado/docente_consultar">Consultar
+                                        Solicitudes</a></li>
+                                <li><a href="https://conest.ciens.ucv.ve/webapp/solicitud_jurado/formulario">Realizar
+                                        Nueva Solicitud de Jurado TEG</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-dropdown">
+                            <button class="nav-link dropdown-toggle" type="button"
+                                aria-expanded="false"><span>Planillas</span><svg class="chevron-icon" width="12"
+                                    height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg></button>
+                            <ul class="dropdown-menu">
+                                <li><a
+                                        href="https://conest.ciens.ucv.ve/webapp/solicitud_jurado/consultar_planillas_teg">Trabajo
+                                        Especial de Grado</a></li>
+                                <li><a
+                                        href="https://conest.ciens.ucv.ve/webapp/solicitud_jurado/consultar_planillas_seminario">Seminario</a>
+                                </li>
+                                <li><a
+                                        href="https://conest.ciens.ucv.ve/webapp/solicitud_jurado/consultar_planillas_pasantia">Pasantía</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main-content dashboard-main" id="mainContent">
+            <div class="dashboard-shell">
+                <header class="workspace-header">
+                    <div class="workspace-title-group">
+                        <h2 class="workspace-title">Módulo Docente</h2>
+                    </div>
+                    <div class="workspace-tools">
+                        <time class="workspace-date" datetime="2026-10-11">Domingo 11 de octubre de 2026</time>
+                    </div>
+                </header>
+
+                <div class="dashboard-grid">
+                    <aside class="profile-panel" aria-labelledby="profileHeading">
+                        <div class="profile-topline"><span class="status-indicator"
+                                aria-hidden="true"></span><span>Sesión activa</span></div>
+                        <div class="profile-avatar" aria-hidden="true">AO</div>
+                        <p class="profile-role">Módulo Docente</p>
+                        <h3 class="profile-name" id="profileHeading">OLIVARES ANDRES</h3>
+                        <p class="profile-id">V-24998740</p>
+                        <a class="profile-account-link"
+                            href="https://conest.ciens.ucv.ve/webapp/usuario/datos_usuario">Datos de usuario</a>
+                        <a class="profile-logout" href="https://conest.ciens.ucv.ve/webapp/inicio/cerrar_sesion"><svg
+                                width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <path d="M16 17l5-5-5-5"></path>
+                                <path d="M21 12H9"></path>
+                            </svg><span>Cerrar sesión</span></a>
+                    </aside>
+
+                    <div class="dashboard-content" id="dashboardContent">
+                        <section class="calendar-panel" aria-labelledby="calendarHeading">
+                            <button class="calendar-accordion-toggle" id="calendarToggle" type="button"
+                                aria-expanded="false" aria-controls="calendarPanel">
+                                <span class="calendar-toggle-icon" aria-hidden="true"><svg width="20" height="20"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="5" width="18" height="16" rx="2"></rect>
+                                        <path d="M16 3v4M8 3v4M3 10h18"></path>
+                                    </svg></span>
+                                <span class="calendar-toggle-copy"><span class="calendar-toggle-title"
+                                        id="calendarHeading">Calendario</span><span
+                                        class="calendar-toggle-caption">Agenda académica</span></span>
+                                <span class="calendar-month-summary">Octubre 2026</span>
+                                <svg class="calendar-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="calendar-panel-content" id="calendarPanel" hidden>
+                                <div class="calendar-month-heading">
+                                    <h3>Octubre <span>2026</span></h3><span class="today-label">Hoy · 11</span>
+                                </div>
+                                <div class="calendar-grid" role="grid" aria-label="Octubre de 2026">
+                                    <span class="calendar-weekday" role="columnheader">Lu</span><span
+                                        class="calendar-weekday" role="columnheader">Ma</span><span
+                                        class="calendar-weekday" role="columnheader">Mi</span><span
+                                        class="calendar-weekday" role="columnheader">Ju</span><span
+                                        class="calendar-weekday" role="columnheader">Vi</span><span
+                                        class="calendar-weekday weekend" role="columnheader">Sá</span><span
+                                        class="calendar-weekday weekend" role="columnheader">Do</span>
+                                    <span class="calendar-day is-empty" role="gridcell" aria-hidden="true"></span><span
+                                        class="calendar-day is-empty" role="gridcell" aria-hidden="true"></span><span
+                                        class="calendar-day is-empty" role="gridcell" aria-hidden="true"></span><span
+                                        class="calendar-day" role="gridcell">1</span><span class="calendar-day"
+                                        role="gridcell">2</span><span class="calendar-day" role="gridcell">3</span><span
+                                        class="calendar-day" role="gridcell">4</span>
+                                    <span class="calendar-day" role="gridcell">5<span class="event-dot dot-blue"
+                                            aria-label="Evento" title="Evento"></span></span><span class="calendar-day"
+                                        role="gridcell">6</span><span class="calendar-day" role="gridcell">7</span><span
+                                        class="calendar-day" role="gridcell">8<span class="event-dot dot-orange"
+                                            aria-label="Evento" title="Evento"></span></span><span class="calendar-day"
+                                        role="gridcell">9</span><span class="calendar-day"
+                                        role="gridcell">10</span><span class="calendar-day is-today" role="gridcell"
+                                        aria-current="date">11<span class="event-dot dot-green" aria-label="Evento"
+                                            title="Evento"></span></span>
+                                    <span class="calendar-day" role="gridcell">12</span><span class="calendar-day"
+                                        role="gridcell">13</span><span class="calendar-day"
+                                        role="gridcell">14</span><span class="calendar-day" role="gridcell">15<span
+                                            class="event-dot dot-red" aria-label="Evento"
+                                            title="Evento"></span></span><span class="calendar-day"
+                                        role="gridcell">16</span><span class="calendar-day"
+                                        role="gridcell">17</span><span class="calendar-day" role="gridcell">18</span>
+                                    <span class="calendar-day" role="gridcell">19</span><span class="calendar-day"
+                                        role="gridcell">20</span><span class="calendar-day" role="gridcell">21<span
+                                            class="event-dot dot-violet" aria-label="Evento"
+                                            title="Evento"></span></span><span class="calendar-day"
+                                        role="gridcell">22</span><span class="calendar-day"
+                                        role="gridcell">23</span><span class="calendar-day"
+                                        role="gridcell">24</span><span class="calendar-day" role="gridcell">25</span>
+                                    <span class="calendar-day" role="gridcell">26</span><span class="calendar-day"
+                                        role="gridcell">27<span class="event-dot dot-teal" aria-label="Evento"
+                                            title="Evento"></span></span><span class="calendar-day"
+                                        role="gridcell">28</span><span class="calendar-day"
+                                        role="gridcell">29</span><span class="calendar-day"
+                                        role="gridcell">30</span><span class="calendar-day"
+                                        role="gridcell">31</span><span class="calendar-day is-empty" role="gridcell"
+                                        aria-hidden="true"></span>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="semester-panel" aria-labelledby="semesterHeading">
+                            <div class="semester-panel-heading">
+                                <div>
+                                    <p class="workspace-eyebrow">DOCENCIA</p>
+                                    <h2 id="semesterHeading">Semestre Actual</h2>
+                                </div><span class="semester-period">01-2026</span>
+                            </div>
+                            <div class="semester-blank" aria-hidden="true"></div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <div class="footer-container">
+                <div class="footer-section contact-info"><span class="footer-heading">Atención y Contacto:</span>
+                    <ul class="contact-links" aria-label="Canales de atención">
+                        <li><a href="mailto:cestudio@ciens.ucv.ve"
+                                class="contact-item"><span>cestudio@ciens.ucv.ve</span></a></li>
+                        <li class="separator" aria-hidden="true">•</li>
+                        <li><a href="https://www.facebook.com/pages/Conest-Ciencias/141480292594979?fref=ts"
+                                target="_blank" rel="noopener noreferrer" class="contact-item"><span>Conest
+                                    Ciencias</span></a></li>
+                    </ul>
+                </div>
+                <div class="footer-section legal-info"><span class="version-badge">CONEST vI.H.C.</span>
+                    <p class="copyright-text">Facultad de Ciencias • Universidad Central de Venezuela</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

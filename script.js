@@ -7,7 +7,21 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initPasswordToggle();
     initFormValidation();
+    initCalendarAccordion();
 });
+
+function initCalendarAccordion() {
+    const toggle = document.getElementById('calendarToggle');
+    const panel = document.getElementById('calendarPanel');
+
+    if (!toggle || !panel) return;
+
+    toggle.addEventListener('click', () => {
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!isExpanded));
+        panel.hidden = isExpanded;
+    });
+}
 
 /* --------------------------------------------------------------------------
    1. Navegación Accesible y Responsive
@@ -219,12 +233,10 @@ function initFormValidation() {
         e.preventDefault();
         setLoadingState(true);
 
-        // Simulamos envío a la plataforma o aviso si es demo
         setTimeout(() => {
             setLoadingState(false);
-            showFeedback('Conectando con el servidor de CONEST UCV...', 'success');
-            // Continuar con envío real de formulario al servidor original
-            form.submit();
+            showFeedback('Acceso validado. Abriendo módulo docente...', 'success');
+            window.location.assign('landing.html');
         }, 800);
     });
 
