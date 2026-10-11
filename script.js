@@ -160,77 +160,14 @@ function initFormValidation() {
     const form = document.getElementById('loginForm');
     if (!form) return;
 
-    const cedulaInput = document.getElementById('usuario_cedula');
-    const claveInput = document.getElementById('usuario_clave');
-    const groupCedula = document.getElementById('groupCedula');
-    const groupClave = document.getElementById('groupClave');
-    const cedulaError = document.getElementById('cedulaError');
-    const claveError = document.getElementById('claveError');
     const formFeedback = document.getElementById('formFeedback');
     const btnSubmit = document.getElementById('btnSubmit');
     const btnText = btnSubmit ? btnSubmit.querySelector('.btn-text') : null;
     const btnSpinner = document.getElementById('btnSpinner');
 
-    // Sanitización en tiempo real: remover caracteres que no sean números
-    if (cedulaInput) {
-        cedulaInput.addEventListener('input', () => {
-            // Permite solo dígitos
-            const rawVal = cedulaInput.value.replace(/[^0-9]/g, '');
-            if (rawVal !== cedulaInput.value) {
-                cedulaInput.value = rawVal;
-            }
-            if (groupCedula.classList.contains('has-error')) {
-                clearFieldError(groupCedula, cedulaError);
-            }
-        });
-    }
-
-    if (claveInput) {
-        claveInput.addEventListener('input', () => {
-            if (groupClave.classList.contains('has-error')) {
-                clearFieldError(groupClave, claveError);
-            }
-        });
-    }
-
     form.addEventListener('submit', (e) => {
-        let isValid = true;
-        hideFeedback();
-
-        // Validar Cédula
-        const cedulaVal = cedulaInput ? cedulaInput.value.trim() : '';
-        if (!cedulaVal) {
-            setFieldError(groupCedula, cedulaError, 'Por favor ingrese su número de cédula.');
-            isValid = false;
-        } else if (!/^\d{5,10}$/.test(cedulaVal)) {
-            setFieldError(groupCedula, cedulaError, 'La cédula debe contener entre 5 y 10 dígitos.');
-            isValid = false;
-        } else {
-            clearFieldError(groupCedula, cedulaError);
-        }
-
-        // Validar Contraseña
-        const claveVal = claveInput ? claveInput.value.trim() : '';
-        if (!claveVal) {
-            setFieldError(groupClave, claveError, 'Por favor ingrese su contraseña.');
-            isValid = false;
-        } else {
-            clearFieldError(groupClave, claveError);
-        }
-
-        if (!isValid) {
-            e.preventDefault();
-            // Foco en el primer campo inválido
-            if (groupCedula.classList.contains('has-error')) {
-                cedulaInput.focus();
-            } else if (groupClave.classList.contains('has-error')) {
-                claveInput.focus();
-            }
-            return;
-        }
-
-        // Estado visual de carga y envío
         e.preventDefault();
+        hideFeedback();
         setLoadingState(true);
 
         setTimeout(() => {
@@ -239,18 +176,6 @@ function initFormValidation() {
             window.location.assign('landing.html');
         }, 800);
     });
-
-    function setFieldError(group, errorElement, message) {
-        if (!group || !errorElement) return;
-        group.classList.add('has-error');
-        errorElement.textContent = message;
-    }
-
-    function clearFieldError(group, errorElement) {
-        if (!group || !errorElement) return;
-        group.classList.remove('has-error');
-        errorElement.textContent = '';
-    }
 
     function showFeedback(message, type = 'error') {
         if (!formFeedback) return;
