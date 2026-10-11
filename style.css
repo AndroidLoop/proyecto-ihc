@@ -1258,8 +1258,8 @@ input:focus-visible {
 }
 
 .semester-panel-heading h2 { margin-top: 0.15rem; color: var(--color-slate-900); font-size: 1rem; }
-.semester-period { padding: 0.25rem 0.55rem; color: var(--color-slate-600); background: var(--color-slate-100); border-radius: var(--radius-sm); font-size: 0.72rem; }
-.semester-heading-actions { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+.semester-period { padding: 0.25rem 0.55rem; color: var(--color-slate-600); background: var(--color-slate-100); border-radius: var(--radius-sm); font-size: 0.72rem; margin-left: 0.55rem;}
+.semester-heading-actions { display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; flex-shrink: 0; }
 .semester-schedule-viewport {
     width: 100%;
     min-width: 0;
@@ -1268,9 +1268,9 @@ input:focus-visible {
     overscroll-behavior-inline: contain;
 }
 
-.schedule-close-button { display: flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.55rem; color: var(--color-slate-600); background: var(--color-white); border: 1px solid var(--color-slate-200); border-radius: 3px; cursor: pointer; font: inherit; font-size: 0.72rem; }
-.schedule-close-button:hover { color: var(--color-primary); background: #f5f7f9; }
-.schedule-close-button:focus-visible { outline: 2px solid var(--color-primary-light); outline-offset: 2px; }
+.schedule-action-button { display: flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.55rem; color: var(--color-slate-600); background: var(--color-white); border: 1px solid var(--color-slate-200); border-radius: 3px; cursor: pointer; font: inherit; font-size: 0.72rem; }
+.schedule-action-button:hover { color: var(--color-primary); background: #f5f7f9; }
+.schedule-action-button:focus-visible { outline: 2px solid var(--color-primary-light); outline-offset: 2px; }
 
 .semester-schedule-viewport:focus-visible { outline: 2px solid var(--color-primary-light); outline-offset: -3px; }
 
@@ -1381,4 +1381,7 @@ input:focus-visible {
     .calendar-panel-content { padding: 0 0.75rem 1rem; }
     .calendar-weekday, .calendar-day { min-height: 42px; }
     .semester-panel { min-height: 220px; }
+    .semester-panel-heading { align-items: flex-start; flex-wrap: wrap; }
+    .semester-panel-heading > div:first-child { min-width: 0; }
+    .semester-heading-actions { width: 100%; flex-wrap: wrap; }
 }

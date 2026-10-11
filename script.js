@@ -21,7 +21,7 @@ const semesterSchedule = {
     ],
     slots: [
         {
-            time: '7:00 - 8:00',
+            times: ['7:00 - 8:00'],
             entries: {
                 monday: [{ code: '6203', sections: [{ name: 'C1M', teacher: 'CASTRO MARCEL' }] }],
                 wednesday: [{ code: '6203', sections: [{ name: 'C1M', teacher: 'CASTRO MARCEL' }] }],
@@ -32,7 +32,7 @@ const semesterSchedule = {
             }
         },
         {
-            time: '8:00 - 9:00',
+            times: ['8:00 - 9:00'],
             entries: {
                 monday: [{ code: '6203', sections: [{ name: 'C1M', teacher: 'CASTRO MARCEL' }] }],
                 wednesday: [{ code: '6203', sections: [{ name: 'C1M', teacher: 'CASTRO MARCEL' }] }],
@@ -46,7 +46,7 @@ const semesterSchedule = {
             }
         },
         {
-            time: '9:00 - 11:00',
+            times: ['9:00 - 10:00', '10:00 - 11:00'],
             entries: {
                 monday: [{ code: '8208', sections: [{ name: 'U1', teacher: 'TORRES FRANGELIS', room: 'Aula 27' }] }],
                 tuesday: [
@@ -74,7 +74,7 @@ const semesterSchedule = {
             }
         },
         {
-            time: '11:00 - 1:00',
+            times: ['11:00 - 12:00', '12:00 - 1:00'],
             entries: {
                 monday: [
                     { code: '6108', sections: [{ name: 'C1P', teacher: 'CASTILLO CARLOS', room: 'Aula 16' }] },
@@ -102,7 +102,7 @@ const semesterSchedule = {
             }
         },
         {
-            time: '1:00 - 3:00',
+            times: ['1:00 - 2:00', '2:00 - 3:00'],
             entries: {
                 monday: [{ code: '8208', sections: [{ name: 'U4', teacher: 'GONZALEZ GUILLERMO', room: 'Aula 06' }] }],
                 tuesday: [{ code: '8208', sections: [{ name: 'U4', teacher: 'GONZALEZ GUILLERMO', room: 'Aula 06' }] }],
@@ -111,7 +111,7 @@ const semesterSchedule = {
             }
         },
         {
-            time: '3:00 - 5:00',
+            times: ['3:00 - 4:00', '4:00 - 5:00'],
             entries: {
                 monday: [{ code: '6203', sections: [{ name: 'C2M', teacher: 'VARGAS ROSANA' }] }],
                 wednesday: [{ code: '6203', sections: [{ name: 'C2M', teacher: 'VARGAS ROSANA' }] }]
@@ -133,7 +133,11 @@ function initSemesterSchedule() {
     const tableBody = document.getElementById('semesterScheduleBody');
     if (!tableBody) return;
 
-    semesterSchedule.slots.forEach((slot, slotIndex) => {
+    const hourlySlots = semesterSchedule.slots.flatMap((slot) =>
+        slot.times.map((time) => ({ time, entries: slot.entries }))
+    );
+
+    hourlySlots.forEach((slot, slotIndex) => {
         const row = document.createElement('tr');
         const timeHeader = document.createElement('th');
         timeHeader.scope = 'row';
@@ -176,6 +180,17 @@ function initSemesterSchedule() {
             setScheduleCardExpanded(card, true);
         }
     });
+
+    const openSinglesButton = document.getElementById('openSingleCardDetails');
+    if (openSinglesButton) {
+        openSinglesButton.addEventListener('click', () => {
+            tableBody.querySelectorAll('.schedule-card-grid').forEach((cardGrid) => {
+                if (cardGrid.children.length === 1) {
+                    setScheduleCardExpanded(cardGrid.querySelector('.schedule-card'), true);
+                }
+            });
+        });
+    }
 
     const closeButton = document.getElementById('closeScheduleDetails');
     if (closeButton) closeButton.addEventListener('click', () => closeExpandedScheduleCard());
