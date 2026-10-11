@@ -235,29 +235,35 @@
                                     <p>Organización y Estructura del Computador II - Semestre 3 - Computación</p>
                                 </div>
                                 <div class="semester-heading-actions">
-                                    <button class="schedule-action-button" id="openSingleCardDetails" type="button"
-                                        title="Abrir todas las tarjetas con un único curso">
-                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                                            stroke-linejoin="round" aria-hidden="true">
-                                            <circle cx="12" cy="12" r="9"></circle>
-                                            <path d="M12 11v5M12 8h.01"></path>
-                                        </svg>
-                                        <span>Abrir tarjetas individuales</span>
+                                    <button class="schedule-action-button" id="toggleStudentCountView" type="button"
+                                        aria-controls="semesterSchedule studentCountSchedule" aria-pressed="false">
+                                        <span>Estudiantes por Horario</span>
                                     </button>
-                                    <button class="schedule-action-button" id="closeScheduleDetails" type="button">
-                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" aria-hidden="true">
-                                            <path d="M18 6 6 18M6 6l12 12"></path>
-                                        </svg>
-                                        <span>Cerrar detalles</span>
-                                    </button>
+                                    <div class="schedule-card-actions" id="scheduleCardActions">
+                                        <button class="schedule-action-button" id="openSingleCardDetails" type="button"
+                                            title="Abrir todas las tarjetas con un único curso">
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                                                stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="9"></circle>
+                                                <path d="M12 11v5M12 8h.01"></path>
+                                            </svg>
+                                            <span>Abrir tarjetas individuales</span>
+                                        </button>
+                                        <button class="schedule-action-button" id="closeScheduleDetails" type="button">
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" aria-hidden="true">
+                                                <path d="M18 6 6 18M6 6l12 12"></path>
+                                            </svg>
+                                            <span>Cerrar detalles</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="semester-schedule-viewport" role="region"
+                            <div class="semester-schedule-viewport" id="semesterScheduleViewport" role="region"
                                 aria-label="Horario semanal; desplazamiento horizontal disponible" tabindex="0">
-                                <table class="semester-schedule">
+                                <table class="semester-schedule" id="semesterSchedule">
                                     <caption class="visually-hidden">Horario semanal del período 01-2026</caption>
                                     <thead>
                                         <tr>
@@ -270,6 +276,20 @@
                                         </tr>
                                     </thead>
                                     <tbody id="semesterScheduleBody"></tbody>
+                                </table>
+                                <table class="semester-schedule student-count-schedule" id="studentCountSchedule" hidden>
+                                    <caption class="visually-hidden">Cantidad de estudiantes cursando cualquier materia por día y hora</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Hora</th>
+                                            <th scope="col">Lunes</th>
+                                            <th scope="col">Martes</th>
+                                            <th scope="col">Miércoles</th>
+                                            <th scope="col">Jueves</th>
+                                            <th scope="col">Viernes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="studentCountScheduleBody"></tbody>
                                 </table>
                             </div>
                         </section>

@@ -21,7 +21,7 @@ const semesterSchedule = {
     ],
     slots: [
         {
-            time: '7:00 - 8:00',
+            time: '07:00 - 08:00',
             entries: {
                 monday: [{ code: '6203', sections: [{ name: 'C1M', teacher: 'CASTRO MARCEL' }] }],
                 wednesday: [{ code: '6203', sections: [{ name: 'C1M', teacher: 'CASTRO MARCEL' }] }],
@@ -32,7 +32,7 @@ const semesterSchedule = {
             }
         },
         {
-            time: '8:00 - 9:00',
+            time: '08:00 - 09:00',
             entries: {
                 monday: [{ code: '6203', sections: [{ name: 'C1M', teacher: 'CASTRO MARCEL' }] }],
                 wednesday: [{ code: '6203', sections: [{ name: 'C1M', teacher: 'CASTRO MARCEL' }] }],
@@ -46,7 +46,7 @@ const semesterSchedule = {
             }
         },
         {
-            time: '9:00 - 11:00',
+            time: '09:00 - 11:00',
             entries: {
                 monday: [{ code: '8208', sections: [{ name: 'U1', teacher: 'TORRES FRANGELIS', room: 'Aula 27' }] }],
                 tuesday: [
@@ -74,7 +74,7 @@ const semesterSchedule = {
             }
         },
         {
-            time: '11:00 - 1:00',
+            time: '11:00 - 13:00',
             entries: {
                 monday: [
                     { code: '6108', sections: [{ name: 'C1P', teacher: 'CASTILLO CARLOS', room: 'Aula 16' }] },
@@ -102,7 +102,7 @@ const semesterSchedule = {
             }
         },
         {
-            time: '1:00 - 3:00',
+            time: '13:00 - 15:00',
             entries: {
                 monday: [{ code: '8208', sections: [{ name: 'U4', teacher: 'GONZALEZ GUILLERMO', room: 'Aula 06' }] }],
                 tuesday: [{ code: '8208', sections: [{ name: 'U4', teacher: 'GONZALEZ GUILLERMO', room: 'Aula 06' }] }],
@@ -111,7 +111,7 @@ const semesterSchedule = {
             }
         },
         {
-            time: '3:00 - 5:00',
+            time: '15:00 - 17:00',
             entries: {
                 monday: [{ code: '6203', sections: [{ name: 'C2M', teacher: 'VARGAS ROSANA' }] }],
                 wednesday: [{ code: '6203', sections: [{ name: 'C2M', teacher: 'VARGAS ROSANA' }] }]
@@ -128,6 +128,21 @@ const semesterCourses = {
     '6203': { name: 'INGENIERIA DE SOFTWARE', color: 'gray' },
     '8208': { name: 'MATEMATICA III', color: 'peach' }
 };
+
+const studentCountsByTime = [
+    { time: '07:00 - 07:59', counts: ['13', '1', '13', '1', '22'] },
+    { time: '08:00 - 08:59', counts: ['13', '1', '13', '1', '22'] },
+    { time: '09:00 - 09:59', counts: ['16', '73', '12', '73', '73'] },
+    { time: '10:00 - 10:59', counts: ['16', '73', '12', '73', '73'] },
+    { time: '11:00 - 11:59', counts: ['27', '5', '27', '9', '31'] },
+    { time: '12:00 - 12:59', counts: ['27', '5', '27', '9', '31'] },
+    { time: '13:00 - 13:59', counts: ['23', '23', '25', '18', '6'] },
+    { time: '14:00 - 14:59', counts: ['23', '23', '25', '18', '28'] },
+    { time: '15:00 - 15:59', counts: ['10', '3', '32', 'LIBRE', '22'] },
+    { time: '16:00 - 16:59', counts: ['10', '3', '30', 'LIBRE', 'LIBRE'] },
+    { time: '17:00 - 17:59', counts: ['LIBRE', '1', 'LIBRE', '3', 'LIBRE'] },
+    { time: '18:00 - 18:59', counts: ['LIBRE', 'LIBRE', 'LIBRE', '3', 'LIBRE'] }
+];
 
 function initSemesterSchedule() {
     const tableBody = document.getElementById('semesterScheduleBody');
@@ -149,6 +164,7 @@ function initSemesterSchedule() {
             const cardGrid = document.createElement('div');
             cardGrid.className = 'schedule-card-grid';
             const entries = (slot.entries[day.key] || []).slice(0, 4);
+            if (entries.length === 1) cardGrid.classList.add('has-one-card');
             if (entries.length === 2) cardGrid.classList.add('has-two-cards');
             entries.forEach((entry, entryIndex) => {
                 const card = createScheduleCard(entry, slot.time, slotIndex, day.key, entryIndex);
@@ -161,6 +177,62 @@ function initSemesterSchedule() {
         });
 
         tableBody.append(row);
+    });
+
+    const countTableBody = document.getElementById('studentCountScheduleBody');
+    const courseSchedule = document.getElementById('semesterSchedule');
+    const countSchedule = document.getElementById('studentCountSchedule');
+    const scheduleViewport = document.getElementById('semesterScheduleViewport');
+    const countViewToggle = document.getElementById('toggleStudentCountView');
+    const cardActions = document.getElementById('scheduleCardActions');
+    if (!countTableBody || !courseSchedule || !countSchedule || !scheduleViewport || !countViewToggle || !cardActions) return;
+
+    studentCountsByTime.forEach((timeSlot) => {
+        const row = document.createElement('tr');
+        const timeHeader = document.createElement('th');
+        timeHeader.scope = 'row';
+        timeHeader.className = 'schedule-time';
+        timeHeader.textContent = timeSlot.time;
+        row.append(timeHeader);
+
+        timeSlot.counts.forEach((count) => {
+            const cell = document.createElement('td');
+            cell.className = 'student-count-value';
+            if (count === 'LIBRE') {
+                cell.classList.add('is-free');
+                cell.textContent = count;
+            } else {
+                const link = document.createElement('a');
+                link.href = '#';
+                link.className = 'student-count-link';
+                link.textContent = count;
+                cell.append(link);
+            }
+            row.append(cell);
+        });
+        countTableBody.append(row);
+    });
+
+    countTableBody.addEventListener('click', (event) => {
+        if (event.target.closest('.student-count-link')) event.preventDefault();
+    });
+
+    countViewToggle.addEventListener('click', () => {
+        const showCountSchedule = countViewToggle.getAttribute('aria-pressed') !== 'true';
+        countViewToggle.setAttribute('aria-pressed', String(showCountSchedule));
+        countViewToggle.querySelector('span').textContent = showCountSchedule
+            ? 'Horario por curso'
+            : 'Estudiantes por Horario';
+        courseSchedule.hidden = showCountSchedule;
+        countSchedule.hidden = !showCountSchedule;
+        cardActions.hidden = showCountSchedule;
+        scheduleViewport.setAttribute(
+            'aria-label',
+            showCountSchedule
+                ? 'Cantidad de estudiantes por día y hora; desplazamiento horizontal disponible'
+                : 'Horario semanal; desplazamiento horizontal disponible'
+        );
+        if (showCountSchedule) closeExpandedScheduleCard();
     });
 
     tableBody.addEventListener('click', (event) => {
@@ -207,7 +279,11 @@ function createScheduleCard(entry, time, slotIndex, dayKey, entryIndex) {
     card.setAttribute('aria-label', `Ver información: ${entry.code}, ${course.name}`);
     card.dataset.detailsLabel = `Ver información: ${entry.code}, ${course.name}`;
     card.dataset.closeLabel = `Ocultar información: ${entry.code}, ${course.name}`;
-    card.innerHTML = '<svg class="schedule-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg>';
+    const sectionLabel = document.createElement('span');
+    sectionLabel.className = 'schedule-section-label';
+    sectionLabel.setAttribute('aria-hidden', 'true');
+    sectionLabel.textContent = entry.sections.map((section) => section.name).join(' / ');
+    card.append(sectionLabel);
 
     const details = document.createElement('span');
     details.className = 'schedule-card-details';
@@ -246,6 +322,7 @@ function setScheduleCardExpanded(card, expanded) {
         item.classList.toggle('is-expanded', isSelected);
         item.setAttribute('aria-expanded', String(isSelected));
         item.setAttribute('aria-label', isSelected ? item.dataset.closeLabel : item.dataset.detailsLabel);
+        item.querySelector('.schedule-section-label').hidden = isSelected;
         item.querySelector('.schedule-card-details').hidden = !isSelected;
     });
 }

@@ -1260,6 +1260,9 @@ input:focus-visible {
 .semester-panel-heading h2 { margin-top: 0.15rem; color: var(--color-slate-900); font-size: 1rem; }
 .semester-period { padding: 0.25rem 0.55rem; color: var(--color-slate-600); background: var(--color-slate-100); border-radius: var(--radius-sm); font-size: 0.72rem; margin-left: 0.55rem;}
 .semester-heading-actions { display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; flex-shrink: 0; }
+.schedule-card-actions { display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; }
+.schedule-card-actions[hidden],
+.semester-schedule[hidden] { display: none; }
 .semester-schedule-viewport {
     width: 100%;
     min-width: 0;
@@ -1293,6 +1296,9 @@ input:focus-visible {
 .semester-schedule thead th:first-child { width: 92px; }
 .semester-schedule .schedule-time { width: 92px; padding: 0.5rem; color: var(--color-slate-600); background: #f8f9fa; font-size: 0.68rem; font-weight: var(--font-weight-semibold); text-align: left; vertical-align: middle; }
 .semester-schedule .schedule-cell { height: 132px; min-width: 0; padding: 0; vertical-align: top; }
+.student-count-value { height: 2.6rem; padding: 0.45rem; background-color: var(--color-slate-300); text-align: center; vertical-align: middle; }
+.student-count-value.is-free { background-color: #caffd5; }
+.student-count-link { color: inherit; text-underline-offset: 2px; }
 
 .schedule-card-grid {
     position: relative;
@@ -1308,6 +1314,11 @@ input:focus-visible {
 }
 
 .schedule-card-grid.has-two-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr);
+}
+
+.schedule-card-grid.has-one-card {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: minmax(0, 1fr);
 }
@@ -1335,7 +1346,7 @@ input:focus-visible {
 .schedule-card-cyan { color: #175663; background: #d9edf0; }
 .schedule-card-amber { color: #765018; background: #fff0ce; }
 .schedule-card-peach { color: #75452d; background: #ffe8dc; }
-.schedule-info-icon { width: 19px; height: 19px; flex: 0 0 auto; }
+.schedule-section-label { font-size: 0.68rem; font-weight: var(--font-weight-bold); line-height: 1.2; text-align: center; overflow-wrap: anywhere; }
 
 .schedule-card.is-expanded {
     position: relative;
@@ -1383,5 +1394,6 @@ input:focus-visible {
     .semester-panel { min-height: 220px; }
     .semester-panel-heading { align-items: flex-start; flex-wrap: wrap; }
     .semester-panel-heading > div:first-child { min-width: 0; }
-    .semester-heading-actions { width: 100%; flex-wrap: wrap; }
+    .semester-heading-actions { width: 100%; flex-wrap: wrap; justify-content: flex-start; }
+    .schedule-card-actions { flex-wrap: wrap; justify-content: flex-start; }
 }
