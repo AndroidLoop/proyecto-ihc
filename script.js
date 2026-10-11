@@ -8,7 +8,245 @@ document.addEventListener('DOMContentLoaded', () => {
     initPasswordToggle();
     initFormValidation();
     initCalendarAccordion();
+    initSemesterSchedule();
 });
+
+const semesterSchedule = {
+    days: [
+        { key: 'monday', label: 'Lunes' },
+        { key: 'tuesday', label: 'Martes' },
+        { key: 'wednesday', label: 'Miércoles' },
+        { key: 'thursday', label: 'Jueves' },
+        { key: 'friday', label: 'Viernes' }
+    ],
+    slots: [
+        {
+            time: '7:00 - 8:00',
+            entries: {
+                monday: [{ code: '6203', sections: [{ name: 'C1M', teacher: 'CASTRO MARCEL' }] }],
+                wednesday: [{ code: '6203', sections: [{ name: 'C1M', teacher: 'CASTRO MARCEL' }] }],
+                friday: [{ code: '6203', sections: [
+                    { name: 'C1M', teacher: 'CASTRO MARCEL' },
+                    { name: 'C2M', teacher: 'VARGAS ROSANA' }
+                ] }]
+            }
+        },
+        {
+            time: '8:00 - 9:00',
+            entries: {
+                monday: [{ code: '6203', sections: [{ name: 'C1M', teacher: 'CASTRO MARCEL' }] }],
+                wednesday: [{ code: '6203', sections: [{ name: 'C1M', teacher: 'CASTRO MARCEL' }] }],
+                friday: [
+                    { code: '0511', sections: [{ name: 'U1', teacher: 'CABRERA CARLOS' }] },
+                    { code: '6203', sections: [
+                        { name: 'C1M', teacher: 'CASTRO MARCEL' },
+                        { name: 'C2M', teacher: 'VARGAS ROSANA' }
+                    ] }
+                ]
+            }
+        },
+        {
+            time: '9:00 - 11:00',
+            entries: {
+                monday: [{ code: '8208', sections: [{ name: 'U1', teacher: 'TORRES FRANGELIS', room: 'Aula 27' }] }],
+                tuesday: [
+                    { code: '6002', sections: [
+                        { name: 'C1P', teacher: 'OLIVARES ANDRES', room: 'Aula 08' },
+                        { name: 'C2P', teacher: 'MARCANO PABLO', room: 'Aula 16' }
+                    ] },
+                    { code: '8208', sections: [{ name: 'U1', teacher: 'TORRES FRANGELIS', room: 'Aula 28' }] }
+                ],
+                wednesday: [{ code: '8208', sections: [{ name: 'U1', teacher: 'TORRES FRANGELIS', room: 'Aula 28' }] }],
+                thursday: [
+                    { code: '6002', sections: [
+                        { name: 'C1P', teacher: 'OLIVARES ANDRES', room: 'Aula 08' },
+                        { name: 'C2P', teacher: 'MARCANO PABLO', room: 'Aula 16' }
+                    ] },
+                    { code: '8208', sections: [{ name: 'U1', teacher: 'TORRES FRANGELIS', room: 'Aula 26' }] }
+                ],
+                friday: [
+                    { code: '0511', sections: [{ name: 'U1', teacher: 'CABRERA CARLOS' }] },
+                    { code: '6002', sections: [
+                        { name: 'C1P', teacher: 'OLIVARES ANDRES', room: 'Aula 06' },
+                        { name: 'C2P', teacher: 'MARCANO PABLO', room: 'Aula 07' }
+                    ] }
+                ]
+            }
+        },
+        {
+            time: '11:00 - 1:00',
+            entries: {
+                monday: [
+                    { code: '6108', sections: [{ name: 'C1P', teacher: 'CASTILLO CARLOS', room: 'Aula 16' }] },
+                    { code: '8208', sections: [
+                        { name: 'U2', teacher: 'MENDOZA REYFEL', room: 'Aula 08' },
+                        { name: 'U3', teacher: 'HERNANDEZ DIEGO', room: 'Aula 27' }
+                    ] }
+                ],
+                tuesday: [{ code: '8208', sections: [
+                    { name: 'U2', teacher: 'MENDOZA REYFEL', room: 'Aula 06' },
+                    { name: 'U3', teacher: 'HERNANDEZ DIEGO', room: 'Aula 25' }
+                ] }],
+                wednesday: [
+                    { code: '6108', sections: [{ name: 'C1P', teacher: 'CASTILLO CARLOS', room: 'Aula 25' }] },
+                    { code: '8208', sections: [
+                        { name: 'U2', teacher: 'MENDOZA REYFEL', room: 'Aula 13' },
+                        { name: 'U3', teacher: 'HERNANDEZ DIEGO', room: 'Aula 29' }
+                    ] }
+                ],
+                thursday: [{ code: '8208', sections: [
+                    { name: 'U2', teacher: 'MENDOZA REYFEL', room: 'Aula 10' },
+                    { name: 'U3', teacher: 'HERNANDEZ DIEGO', room: 'Aula 13' }
+                ] }],
+                friday: [{ code: '6108', sections: [{ name: 'C1P', teacher: 'CASTILLO CARLOS', room: 'Aula 06' }] }]
+            }
+        },
+        {
+            time: '1:00 - 3:00',
+            entries: {
+                monday: [{ code: '8208', sections: [{ name: 'U4', teacher: 'GONZALEZ GUILLERMO', room: 'Aula 06' }] }],
+                tuesday: [{ code: '8208', sections: [{ name: 'U4', teacher: 'GONZALEZ GUILLERMO', room: 'Aula 06' }] }],
+                wednesday: [{ code: '8208', sections: [{ name: 'U4', teacher: 'GONZALEZ GUILLERMO', room: 'Aula 06' }] }],
+                thursday: [{ code: '8208', sections: [{ name: 'U4', teacher: 'GONZALEZ GUILLERMO', room: 'Aula 06' }] }]
+            }
+        },
+        {
+            time: '3:00 - 5:00',
+            entries: {
+                monday: [{ code: '6203', sections: [{ name: 'C2M', teacher: 'VARGAS ROSANA' }] }],
+                wednesday: [{ code: '6203', sections: [{ name: 'C2M', teacher: 'VARGAS ROSANA' }] }]
+            }
+        }
+    ]
+};
+
+const semesterCourses = {
+    '0030': { name: 'INGLES I', color: 'gray' },
+    '0511': { name: 'FUNDAMENTOS DE BIOÉTICA', color: 'blue' },
+    '6002': { name: 'ORG.Y ESTRUCT.DEL COMP.II', color: 'cyan' },
+    '6108': { name: 'MATEMATICAS DISCRETAS III', color: 'amber' },
+    '6203': { name: 'INGENIERIA DE SOFTWARE', color: 'gray' },
+    '8208': { name: 'MATEMATICA III', color: 'peach' }
+};
+
+function initSemesterSchedule() {
+    const tableBody = document.getElementById('semesterScheduleBody');
+    if (!tableBody) return;
+
+    semesterSchedule.slots.forEach((slot, slotIndex) => {
+        const row = document.createElement('tr');
+        const timeHeader = document.createElement('th');
+        timeHeader.scope = 'row';
+        timeHeader.className = 'schedule-time';
+        timeHeader.textContent = slot.time;
+        row.append(timeHeader);
+
+        semesterSchedule.days.forEach((day) => {
+            const cell = document.createElement('td');
+            cell.className = 'schedule-cell';
+            cell.setAttribute('aria-label', `${day.label}, ${slot.time}`);
+
+            const cardGrid = document.createElement('div');
+            cardGrid.className = 'schedule-card-grid';
+            const entries = (slot.entries[day.key] || []).slice(0, 4);
+            if (entries.length === 2) cardGrid.classList.add('has-two-cards');
+            entries.forEach((entry, entryIndex) => {
+                const card = createScheduleCard(entry, slot.time, slotIndex, day.key, entryIndex);
+                cardGrid.append(card);
+                if (entries.length === 1) setScheduleCardExpanded(card, true);
+            });
+
+            cell.append(cardGrid);
+            row.append(cell);
+        });
+
+        tableBody.append(row);
+    });
+
+    tableBody.addEventListener('click', (event) => {
+        const card = event.target.closest('.schedule-card');
+        if (!card) return;
+
+        const cardGrid = card.closest('.schedule-card-grid');
+        const expandedCard = cardGrid.querySelector('.schedule-card[aria-expanded="true"]');
+        if (expandedCard === card) {
+            setScheduleCardExpanded(card, false);
+        } else {
+            if (expandedCard) setScheduleCardExpanded(expandedCard, false);
+            setScheduleCardExpanded(card, true);
+        }
+    });
+
+    const closeButton = document.getElementById('closeScheduleDetails');
+    if (closeButton) closeButton.addEventListener('click', () => closeExpandedScheduleCard());
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeExpandedScheduleCard(true);
+    });
+}
+
+function createScheduleCard(entry, time, slotIndex, dayKey, entryIndex) {
+    const course = semesterCourses[entry.code];
+    const card = document.createElement('button');
+    const detailsId = `schedule-details-${slotIndex}-${dayKey}-${entryIndex}`;
+    card.type = 'button';
+    card.className = `schedule-card schedule-card-${course.color}`;
+    card.setAttribute('aria-expanded', 'false');
+    card.setAttribute('aria-controls', detailsId);
+    card.setAttribute('aria-label', `Ver información: ${entry.code}, ${course.name}`);
+    card.dataset.detailsLabel = `Ver información: ${entry.code}, ${course.name}`;
+    card.dataset.closeLabel = `Ocultar información: ${entry.code}, ${course.name}`;
+    card.innerHTML = '<svg class="schedule-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg>';
+
+    const details = document.createElement('span');
+    details.className = 'schedule-card-details';
+    details.id = detailsId;
+    details.hidden = true;
+
+    const heading = document.createElement('span');
+    heading.className = 'schedule-detail-heading';
+    heading.textContent = `${entry.code} · ${course.name}`;
+    details.append(heading);
+
+    entry.sections.forEach((section) => {
+        const line = document.createElement('span');
+        line.className = 'schedule-detail-line';
+        line.textContent = [section.name, section.teacher, section.room].filter(Boolean).join(' · ');
+        details.append(line);
+    });
+
+    const timeLine = document.createElement('span');
+    timeLine.className = 'schedule-detail-time';
+    timeLine.textContent = time;
+    details.append(timeLine);
+    card.append(details);
+
+    return card;
+}
+
+function setScheduleCardExpanded(card, expanded) {
+    const cardGrid = card.closest('.schedule-card-grid');
+    if (!cardGrid) return;
+
+    cardGrid.classList.toggle('has-expanded-card', expanded);
+    cardGrid.querySelectorAll('.schedule-card').forEach((item) => {
+        const isSelected = item === card && expanded;
+        item.hidden = expanded && !isSelected;
+        item.classList.toggle('is-expanded', isSelected);
+        item.setAttribute('aria-expanded', String(isSelected));
+        item.setAttribute('aria-label', isSelected ? item.dataset.closeLabel : item.dataset.detailsLabel);
+        item.querySelector('.schedule-card-details').hidden = !isSelected;
+    });
+}
+
+function closeExpandedScheduleCard(restoreFocus = false) {
+    const expandedCards = [...document.querySelectorAll('.schedule-card[aria-expanded="true"]')];
+    if (!expandedCards.length) return;
+
+    const focusedCard = expandedCards.find((card) => card === document.activeElement) || expandedCards[0];
+    expandedCards.forEach((card) => setScheduleCardExpanded(card, false));
+    if (restoreFocus) focusedCard.focus();
+}
 
 function initCalendarAccordion() {
     const toggle = document.getElementById('calendarToggle');

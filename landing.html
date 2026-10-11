@@ -231,11 +231,38 @@
                         <section class="semester-panel" aria-labelledby="semesterHeading">
                             <div class="semester-panel-heading">
                                 <div>
-                                    <p class="workspace-eyebrow">DOCENCIA</p>
                                     <h2 id="semesterHeading">Semestre Actual</h2>
-                                </div><span class="semester-period">01-2026</span>
+                                    <p>Organización y Estructura del Computador II - Semestre 3 - Computación</p>
+                                </div>
+                                <div class="semester-heading-actions">
+                                    <button class="schedule-close-button" id="closeScheduleDetails" type="button">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M18 6 6 18M6 6l12 12"></path>
+                                        </svg>
+                                        <span>Cerrar detalles</span>
+                                    </button>
+                                    <span class="semester-period">01-2026</span>
+                                </div>
                             </div>
-                            <div class="semester-blank" aria-hidden="true"></div>
+                            <div class="semester-schedule-viewport" role="region"
+                                aria-label="Horario semanal; desplazamiento horizontal disponible" tabindex="0">
+                                <table class="semester-schedule">
+                                    <caption class="visually-hidden">Horario semanal del período 01-2026</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Hora</th>
+                                            <th scope="col">Lunes</th>
+                                            <th scope="col">Martes</th>
+                                            <th scope="col">Miércoles</th>
+                                            <th scope="col">Jueves</th>
+                                            <th scope="col">Viernes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="semesterScheduleBody"></tbody>
+                                </table>
+                            </div>
                         </section>
                     </div>
                 </div>
