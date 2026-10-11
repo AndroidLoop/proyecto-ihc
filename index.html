@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONEST - Sistema de Gestión Académica | Facultad de Ciencias UCV</title>
+    <link rel="shortcut icon" href="https://conest.ciens.ucv.ve/webapp/assets/favicon-d1342303b1597732c8c607134e460ddd.ico" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Encabezado Institucional -->
+        <header class="app-header">
+            <div class="header-container">
+                <div class="brand-section">
+                    <a href="index.html" class="brand-logo" aria-label="Inicio CONEST">
+                        <img src="conest original/CONEST - Sistema de gestión académica - Inicio_files/logo_conest-1d67698e7884dfb1c74c9485c77f00cc.png" alt="Logo CONEST" class="img-logo-conest">
+                    </a>
+                    <div class="brand-titles">
+                        <h1 class="portal-title">CONEST</h1>
+                        <p class="portal-subtitle">Sistema de Gestión Académica • Facultad de Ciencias</p>
+                    </div>
+                </div>
+
+                <div class="institutional-section">
+                    <div class="institutional-links" aria-label="Enlaces institucionales">
+                        <a href="http://www.ucv.ve/" target="_blank" rel="noopener noreferrer">Universidad Central de Venezuela</a>
+                        <span class="link-separator" aria-hidden="true">|</span>
+                        <a href="http://www.ciens.ucv.ve/" target="_blank" rel="noopener noreferrer">Facultad de Ciencias</a>
+                    </div>
+                    <div class="institutional-logos">
+                        <a href="http://www.ucv.ve/" target="_blank" rel="noopener noreferrer" title="Universidad Central de Venezuela">
+                            <img src="conest original/CONEST - Sistema de gestión académica - Inicio_files/logo_ucv-2b9dff9ff94eaf41cfddfd7611358aaa.png" alt="Escudo UCV" class="img-logo-ucv">
+                        </a>
+                        <a href="http://www.ciens.ucv.ve/" target="_blank" rel="noopener noreferrer" title="Facultad de Ciencias UCV">
+                            <img src="conest original/CONEST - Sistema de gestión académica - Inicio_files/logo_ciencias-5bbdf16cb5e7e07aaff3c830599be698.png" alt="Logo Facultad de Ciencias" class="img-logo-ciencias">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra de Navegación Principal -->
+            <nav class="main-nav" aria-label="Menú principal">
+                <div class="nav-container">
+                    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNavList" aria-label="Abrir menú de navegación">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                        <span class="nav-toggle-text">Menú</span>
+                    </button>
+
+                    <ul class="nav-list" id="primaryNavList">
+                        <!-- Solicitudes de Constancias -->
+                        <li class="nav-item has-dropdown">
+                            <button class="nav-link dropdown-toggle" type="button" aria-expanded="false">
+                                <span>Solicitudes de Constancias</span>
+                                <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/constancia_simple">Estudios</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/constancia_simple">Kardex</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/constancia_simple">Notas Aprobadas</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/constancia_programas_horarios">Programas y Pensum</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/constancia_simple">Buena Conducta</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/constancia_simple">Culminación de Asignaturas</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/constancia_simple">Culminación de Estudios</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Información de Procesos -->
+                        <li class="nav-item has-dropdown">
+                            <button class="nav-link dropdown-toggle" type="button" aria-expanded="false">
+                                <span>Información de Procesos</span>
+                                <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/inscripcion">Inscripción de Alumnos Regulares</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/inscripcion_pci">Inscripción de Materias PCI</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/descargar_planilla?documento=1">Modificación de inscripción</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/realizar_por_conest">Retiro de Asignaturas</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/retiro_total">Retiro Total</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/realizar_por_conest">Solicitudes Estudiantiles</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/reincorporacion">Reincorporaciones</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/cambio_equivalencia">Cambio, Equivalencia o Egresados</a></li>
+                                <li class="has-submenu" role="none">
+                                    <button class="submenu-toggle" type="button" aria-expanded="false">
+                                        <span>Grado</span>
+                                        <svg class="chevron-right" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </button>
+                                    <ul class="submenu" role="menu">
+                                        <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/descargar_planilla?documento=12">Planillas de Recaudos 1-2019</a></li>
+                                        <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/descargar_planilla?documento=16">Planilla de recaudos de grado 1-2019</a></li>
+                                        <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/descargar_planilla?documento=13">Recaudos de grado 1-2019</a></li>
+                                        <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/descargar_planilla?documento=19">Cronograma de grado 1-2019</a></li>
+                                    </ul>
+                                </li>
+                                <li role="none"><a role="menuitem" href="javascript:void(0)">Encuesta</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Reglamentos -->
+                        <li class="nav-item has-dropdown">
+                            <button class="nav-link dropdown-toggle" type="button" aria-expanded="false">
+                                <span>Reglamentos</span>
+                                <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/descargar_planilla?documento=4">De los Estudios de Pregrado</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/descargar_planilla?documento=6">Prosecución y Rendimiento</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/descargar_planilla?documento=7">Becas y Pasantías</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/descargar_planilla?documento=8">Menciones Honoríficas</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Calendarios -->
+                        <li class="nav-item has-dropdown">
+                            <button class="nav-link dropdown-toggle" type="button" aria-expanded="false">
+                                <span>Calendarios</span>
+                                <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/descargar_planilla?documento=11">Exámenes de Reparación Semestre 01-2025</a></li>
+                                <li role="none"><a role="menuitem" href="https://conest.ciens.ucv.ve/webapp/control_estudios/descargar_planilla?documento=17">Académico Semestre 01-2026</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Contenido Principal: Login Centrado en Pantalla Completa -->
+        <main class="main-content" id="mainContent">
+            <div class="login-wrapper">
+                <section class="login-card" aria-labelledby="loginHeading">
+                    <header class="card-header">
+                        <div class="card-icon-badge" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                        <h2 id="loginHeading" class="card-title">Acceso al Sistema</h2>
+                        <p class="card-subtitle">Ingrese sus credenciales de usuario para gestionar sus trámites académicos</p>
+                    </header>
+
+                    <form id="loginForm" class="login-form" method="post" action="https://conest.ciens.ucv.ve/webapp/inicio/validar" novalidate>
+                        <div class="feedback-message" id="formFeedback" role="alert" aria-live="polite" style="display: none;"></div>
+
+                        <!-- Campo Cédula -->
+                        <div class="form-group" id="groupCedula">
+                            <label for="usuario_cedula" class="form-label">
+                                <span>Cédula de Identidad</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <span class="input-icon" aria-hidden="true">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                </span>
+                                <input
+                                    id="usuario_cedula"
+                                    name="usuario[cedula]"
+                                    type="text"
+                                    class="form-input"
+                                    placeholder="Ej. 12345678"
+                                    inputmode="numeric"
+                                    autocomplete="username"
+                                    required
+                                    aria-describedby="cedulaHelp cedulaError">
+                            </div>
+                            <span class="field-hint" id="cedulaHelp">Número sin puntos ni letras</span>
+                            <span class="field-error" id="cedulaError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- Campo Contraseña -->
+                        <div class="form-group" id="groupClave">
+                            <div class="label-row">
+                                <label for="usuario_clave" class="form-label">
+                                    <span>Contraseña</span>
+                                </label>
+                            </div>
+                            <div class="input-wrapper">
+                                <span class="input-icon" aria-hidden="true">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                </span>
+                                <input
+                                    id="usuario_clave"
+                                    name="usuario[clave]"
+                                    type="password"
+                                    class="form-input"
+                                    placeholder="Ingrese su contraseña"
+                                    autocomplete="current-password"
+                                    required
+                                    aria-describedby="claveError">
+                                <button type="button" class="btn-toggle-password" id="btnTogglePassword" aria-label="Mostrar contraseña" title="Mostrar contraseña">
+                                    <svg class="icon-eye" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    <svg class="icon-eye-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: none;">
+                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="field-error" id="claveError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- Botón de Inicio de Sesión -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary" id="btnSubmit">
+                                <span class="btn-text">Iniciar Sesión</span>
+                                <span class="spinner" id="btnSpinner" aria-hidden="true" style="display: none;">
+                                    <svg class="spinner-svg" viewBox="0 0 24 24">
+                                        <circle class="spinner-circle" cx="12" cy="12" r="10" fill="none" stroke-width="3"></circle>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+
+                        <!-- Recuperación de Clave -->
+                        <div class="card-footer-links">
+                            <a href="https://conest.ciens.ucv.ve/webapp/inicio/recuperar_clave" class="forgot-link">¿Olvidaste tu contraseña?</a>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </main>
+
+        <!-- Pie de Página Institucional Modernizado -->
+        <footer class="app-footer">
+            <div class="footer-container">
+                <!-- Canales de Contacto Reubicados -->
+                <div class="footer-section contact-info">
+                    <span class="footer-heading">Atención y Contacto:</span>
+                    <ul class="contact-links" aria-label="Canales de atención">
+                        <li>
+                            <a href="mailto:cestudio@ciens.ucv.ve" class="contact-item">
+                                <img src="conest original/CONEST - Sistema de gestión académica - Inicio_files/email-5c2bf70937e46aa98a0a77088690b001.png" alt="" width="16" height="16" class="contact-icon">
+                                <span>cestudio@ciens.ucv.ve</span>
+                            </a>
+                        </li>
+                        <li class="separator" aria-hidden="true">•</li>
+                        <li>
+                            <a href="https://www.facebook.com/pages/Conest-Ciencias/141480292594979?fref=ts" target="_blank" rel="noopener noreferrer" class="contact-item">
+                                <img src="conest original/CONEST - Sistema de gestión académica - Inicio_files/facebook-a58da49729ba86969015acae8f0fdf81.png" alt="" width="16" height="16" class="contact-icon">
+                                <span>Conest Ciencias</span>
+                            </a>
+                        </li>
+                        <li class="separator" aria-hidden="true">•</li>
+                        <li>
+                            <a href="https://twitter.com/conestciencias" target="_blank" rel="noopener noreferrer" class="contact-item">
+                                <img src="conest original/CONEST - Sistema de gestión académica - Inicio_files/twitter-b3e5b65822989a9ebc44ad79fc18563e.png" alt="" width="16" height="16" class="contact-icon">
+                                <span>@ConestCiencias</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Línea de Copyright y Versión -->
+                <div class="footer-section legal-info">
+                    <span class="version-badge">CONEST vI.H.C.</span>
+                    <p class="copyright-text">
+                        Carlos  • Facultad de Ciencias • Universidad Central de Venezuela
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
