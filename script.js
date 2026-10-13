@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPasswordToggle();
     initFormValidation();
     initCalendarAccordion();
+    initAboutDialog();
     initSemesterSchedule();
 });
 
@@ -346,6 +347,26 @@ function initCalendarAccordion() {
         const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
         toggle.setAttribute('aria-expanded', String(!isExpanded));
         panel.hidden = isExpanded;
+    });
+}
+
+function initAboutDialog() {
+    const trigger = document.getElementById('aboutTrigger');
+    const dialog = document.getElementById('aboutDialog');
+    const closeButton = document.getElementById('aboutDialogClose');
+
+    if (!trigger || !dialog || !closeButton) return;
+
+    trigger.addEventListener('click', () => dialog.showModal());
+    closeButton.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            dialog.close();
+        }
+    });
+    dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
     });
 }
 
