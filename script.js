@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPasswordToggle();
     initFormValidation();
     initCalendarAccordion();
+    initAcademicCalendar();
     initAboutDialog();
     initSemesterSchedule();
 });
@@ -348,6 +349,251 @@ function initCalendarAccordion() {
         toggle.setAttribute('aria-expanded', String(!isExpanded));
         panel.hidden = isExpanded;
     });
+}
+
+const academicCalendar = {
+    year: 2026,
+    month: 9,
+    today: '2026-10-13',
+    events: [
+        { id: 'withdrawal-deadline', title: 'Fecha máxima de retiro', start: '2026-10-09', end: '2026-10-09', color: 'deadline' },
+        { id: 'grading-week', title: 'Semana de calificación', start: '2026-10-19', end: '2026-10-30', color: 'grading' },
+        { id: 'repair-week', title: 'Semana de reparación', start: '2026-10-26', end: '2026-10-30', color: 'repair' }
+    ]
+};
+
+function initAcademicCalendar() {
+    const weeksContainer = document.getElementById('calendarWeeks');
+    const eventList = document.getElementById('calendarEventList');
+    const clearButton = document.getElementById('clearCalendarSelection');
+    const selectionStatus = document.getElementById('calendarSelectionStatus');
+    const todayLabel = document.querySelector('.today-label');
+    if (!weeksContainer || !eventList || !clearButton || !selectionStatus || !todayLabel) return;
+
+    const { year, month, today, events } = academicCalendar;
+    const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+    const firstDayOffset = (new Date(Date.UTC(year, month, 1)).getUTCDay() + 6) % 7;
+    const weekCount = Math.ceil((firstDayOffset + daysInMonth) / 7);
+    const fullDateFormatter = new Intl.DateTimeFormat('es-VE', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC'
+    });
+    const dateFormatter = new Intl.DateTimeFormat('es-VE', {
+        day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC'
+    });
+    const dayFormatter = new Intl.DateTimeFormat('es-VE', { day: 'numeric', timeZone: 'UTC' });
+    const makeDate = (day) => new Date(Date.UTC(year, month, day));
+    const makeDateKey = (date) => date.toISOString().slice(0, 10);
+    let selectedEventId = null;
+    let selectedDate = null;
+
+    todayLabel.textContent = `Hoy · ${today.slice(-2)}`;
+    renderCalendarEventCards(eventList, events, dateFormatter, dayFormatter);
+    renderCalendarWeeks(weeksContainer, {
+        year, month, today, events, daysInMonth, firstDayOffset, weekCount, fullDateFormatter, makeDate, makeDateKey
+    });
+
+    function updateSelection(message) {
+        const activeEvents = selectedEventId
+            ? events.filter((calendarEvent) => calendarEvent.id === selectedEventId)
+            : selectedDate
+                ? events.filter((calendarEvent) => selectedDate >= calendarEvent.start && selectedDate <= calendarEvent.end)
+                : [];
+        const activeEventIds = new Set(activeEvents.map((calendarEvent) => calendarEvent.id));
+
+        weeksContainer.querySelectorAll('.calendar-date-highlight').forEach((highlight) => highlight.remove());
+        weeksContainer.querySelectorAll('.calendar-day[data-date]').forEach((dayButton) => {
+            const date = dayButton.dataset.date;
+            const isSelectedDate = date === selectedDate;
+            const isInActiveEvent = activeEvents.some((calendarEvent) => (
+                date >= calendarEvent.start && date <= calendarEvent.end
+            ));
+            dayButton.classList.toggle('is-selected-date', isSelectedDate);
+            dayButton.classList.toggle('is-event-highlighted', isInActiveEvent);
+            dayButton.setAttribute('aria-pressed', String(isSelectedDate));
+
+            if (!isSelectedDate && !isInActiveEvent) return;
+            const highlight = document.createElement('span');
+            highlight.className = 'calendar-date-highlight';
+            if (isSelectedDate) highlight.classList.add('is-date-selected');
+            if (isInActiveEvent) highlight.classList.add('is-event-range');
+            highlight.style.gridColumn = dayButton.dataset.column;
+            highlight.style.gridRow = isInActiveEvent ? '1 / -1' : '1';
+            dayButton.closest('.calendar-week').append(highlight);
+        });
+
+        eventList.querySelectorAll('.calendar-event-card').forEach((card) => {
+            const isActive = activeEventIds.has(card.dataset.eventId);
+            card.classList.toggle('is-selected', isActive);
+            card.setAttribute('aria-pressed', String(isActive));
+        });
+        weeksContainer.querySelectorAll('.calendar-event-bar, .calendar-event-dot').forEach((marker) => {
+            marker.classList.toggle('is-selected', activeEventIds.has(marker.dataset.eventId));
+        });
+
+        clearButton.disabled = selectedEventId === null && selectedDate === null;
+        selectionStatus.textContent = message;
+    }
+
+    weeksContainer.addEventListener('click', (event) => {
+        const dayButton = event.target.closest('.calendar-day[data-date]');
+        if (!dayButton) return;
+        selectedDate = selectedDate === dayButton.dataset.date ? null : dayButton.dataset.date;
+        selectedEventId = null;
+        updateSelection(selectedDate ? `Fecha seleccionada: ${dayButton.getAttribute('aria-label')}` : 'Selección limpiada.');
+    });
+
+    weeksContainer.addEventListener('keydown', (event) => {
+        const dayButton = event.target.closest('.calendar-day[data-date]');
+        if (!dayButton) return;
+        const keyOffsets = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 };
+        if (keyOffsets[event.key] !== undefined) {
+            event.preventDefault();
+            const currentDay = Number(dayButton.dataset.date.slice(-2));
+            const nextDay = Math.min(daysInMonth, Math.max(1, currentDay + keyOffsets[event.key]));
+            weeksContainer.querySelector(`[data-date="${makeDateKey(makeDate(nextDay))}"]`).focus();
+        }
+    });
+
+    eventList.addEventListener('click', (event) => {
+        const card = event.target.closest('.calendar-event-card');
+        if (!card) return;
+        selectedEventId = selectedEventId === card.dataset.eventId ? null : card.dataset.eventId;
+        selectedDate = null;
+        const selectedEvent = events.find((calendarEvent) => calendarEvent.id === selectedEventId);
+        updateSelection(selectedEvent
+            ? `Evento seleccionado: ${selectedEvent.title}, ${card.querySelector('.calendar-event-dates').textContent}.`
+            : 'Selección limpiada.');
+    });
+
+    clearButton.addEventListener('click', () => {
+        selectedDate = null;
+        selectedEventId = null;
+        updateSelection('Selección limpiada.');
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape' || (selectedEventId === null && selectedDate === null)) return;
+        selectedDate = null;
+        selectedEventId = null;
+        updateSelection('Selección limpiada.');
+    });
+
+    document.addEventListener('click', (event) => {
+        if (event.target.closest('.calendar-event-card, .calendar-day[data-date], #clearCalendarSelection')) return;
+        if (selectedEventId === null && selectedDate === null) return;
+        selectedDate = null;
+        selectedEventId = null;
+        updateSelection('Selección limpiada.');
+    }, true);
+}
+
+function renderCalendarEventCards(eventList, events, dateFormatter, dayFormatter) {
+    events.forEach((calendarEvent) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = `calendar-event-card calendar-event-${calendarEvent.color}`;
+        card.dataset.eventId = calendarEvent.id;
+        card.setAttribute('aria-pressed', 'false');
+
+        const dateLabel = formatCalendarEventRange(calendarEvent, dateFormatter, dayFormatter);
+        card.setAttribute('aria-label', `${calendarEvent.title}, ${dateLabel}`);
+
+        const swatch = document.createElement('span');
+        swatch.className = 'calendar-event-swatch';
+        swatch.setAttribute('aria-hidden', 'true');
+        const copy = document.createElement('span');
+        copy.className = 'calendar-event-copy';
+        const title = document.createElement('span');
+        title.className = 'calendar-event-title';
+        title.textContent = calendarEvent.title;
+        const dates = document.createElement('span');
+        dates.className = 'calendar-event-dates';
+        dates.textContent = dateLabel;
+        copy.append(title, dates);
+        card.append(swatch, copy);
+        eventList.append(card);
+    });
+}
+
+function formatCalendarEventRange(calendarEvent, dateFormatter, dayFormatter) {
+    const start = new Date(`${calendarEvent.start}T12:00:00Z`);
+    const end = new Date(`${calendarEvent.end}T12:00:00Z`);
+    if (calendarEvent.start === calendarEvent.end) return dateFormatter.format(start);
+
+    const sameMonth = calendarEvent.start.slice(0, 7) === calendarEvent.end.slice(0, 7);
+    return sameMonth
+        ? `Del ${dayFormatter.format(start)} al ${dateFormatter.format(end)}`
+        : `Del ${dateFormatter.format(start)} al ${dateFormatter.format(end)}`;
+}
+
+function renderCalendarWeeks(weeksContainer, calendar) {
+    const { year, month, today, events, daysInMonth, firstDayOffset, weekCount, fullDateFormatter, makeDate, makeDateKey } = calendar;
+
+    for (let weekIndex = 0; weekIndex < weekCount; weekIndex += 1) {
+        const week = document.createElement('div');
+        week.className = 'calendar-week';
+        const weekStartIndex = weekIndex * 7;
+
+        for (let column = 0; column < 7; column += 1) {
+            const day = weekStartIndex + column - firstDayOffset + 1;
+            if (day < 1 || day > daysInMonth) {
+                const emptyDay = document.createElement('span');
+                emptyDay.className = 'calendar-day is-empty';
+                emptyDay.setAttribute('aria-hidden', 'true');
+                week.append(emptyDay);
+                continue;
+            }
+
+            const date = makeDateKey(makeDate(day));
+            const matchingEvents = events.filter((calendarEvent) => date >= calendarEvent.start && date <= calendarEvent.end);
+            const dayButton = document.createElement('button');
+            dayButton.type = 'button';
+            dayButton.className = 'calendar-day';
+            dayButton.dataset.date = date;
+            dayButton.dataset.column = String(column + 1);
+            dayButton.style.gridColumn = String(column + 1);
+            dayButton.textContent = String(day);
+            dayButton.setAttribute('aria-label', matchingEvents.length
+                ? `${fullDateFormatter.format(makeDate(day))}. Eventos: ${matchingEvents.map((item) => item.title).join(', ')}`
+                : fullDateFormatter.format(makeDate(day)));
+            dayButton.setAttribute('aria-pressed', 'false');
+            if (date === today) {
+                dayButton.classList.add('is-today');
+                dayButton.setAttribute('aria-current', 'date');
+            }
+            week.append(dayButton);
+        }
+
+        const laneEnds = [];
+        events.forEach((calendarEvent) => {
+            const eventStart = Number(calendarEvent.start.slice(-2)) + firstDayOffset - 1;
+            const eventEnd = Number(calendarEvent.end.slice(-2)) + firstDayOffset - 1;
+            const segmentStart = Math.max(weekStartIndex, eventStart);
+            const segmentEnd = Math.min(weekStartIndex + 6, eventEnd);
+            if (segmentStart > segmentEnd) return;
+
+            const startColumn = segmentStart - weekStartIndex;
+            const endColumn = segmentEnd - weekStartIndex;
+            let lane = laneEnds.findIndex((laneEnd) => startColumn > laneEnd);
+            if (lane === -1) lane = laneEnds.length;
+            laneEnds[lane] = endColumn;
+
+            const isSingleDay = calendarEvent.start === calendarEvent.end;
+            const marker = document.createElement('span');
+            marker.className = `${isSingleDay ? 'calendar-event-dot' : 'calendar-event-bar'} calendar-event-${calendarEvent.color}`;
+            marker.dataset.eventId = calendarEvent.id;
+            marker.setAttribute('aria-hidden', 'true');
+            marker.style.gridColumn = `${startColumn + 1} / ${endColumn + 2}`;
+            marker.style.gridRow = String(lane + 2);
+            if (!isSingleDay && segmentStart > eventStart) marker.classList.add('continues-before');
+            if (!isSingleDay && segmentEnd < eventEnd) marker.classList.add('continues-after');
+            week.append(marker);
+        });
+
+    week.classList.toggle('has-event-lanes', laneEnds.length > 0);
+    week.style.setProperty('--calendar-lane-count', laneEnds.length);
+        weeksContainer.append(week);
+    }
 }
 
 function initAboutDialog() {

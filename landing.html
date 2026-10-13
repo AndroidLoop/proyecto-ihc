@@ -168,51 +168,28 @@
                                 <div class="calendar-month-heading">
                                     <h3>Octubre <span>2026</span></h3><span class="today-label">Hoy · 11</span>
                                 </div>
-                                <div class="calendar-grid" role="grid" aria-label="Octubre de 2026">
-                                    <span class="calendar-weekday" role="columnheader">Lu</span><span
-                                        class="calendar-weekday" role="columnheader">Ma</span><span
-                                        class="calendar-weekday" role="columnheader">Mi</span><span
-                                        class="calendar-weekday" role="columnheader">Ju</span><span
-                                        class="calendar-weekday" role="columnheader">Vi</span><span
-                                        class="calendar-weekday weekend" role="columnheader">Sá</span><span
-                                        class="calendar-weekday weekend" role="columnheader">Do</span>
-                                    <span class="calendar-day is-empty" role="gridcell" aria-hidden="true"></span><span
-                                        class="calendar-day is-empty" role="gridcell" aria-hidden="true"></span><span
-                                        class="calendar-day is-empty" role="gridcell" aria-hidden="true"></span><span
-                                        class="calendar-day" role="gridcell">1</span><span class="calendar-day"
-                                        role="gridcell">2</span><span class="calendar-day" role="gridcell">3</span><span
-                                        class="calendar-day" role="gridcell">4</span>
-                                    <span class="calendar-day" role="gridcell">5<span class="event-dot dot-blue"
-                                            aria-label="Evento" title="Evento"></span></span><span class="calendar-day"
-                                        role="gridcell">6</span><span class="calendar-day" role="gridcell">7</span><span
-                                        class="calendar-day" role="gridcell">8<span class="event-dot dot-orange"
-                                            aria-label="Evento" title="Evento"></span></span><span class="calendar-day"
-                                        role="gridcell">9</span><span class="calendar-day"
-                                        role="gridcell">10</span><span class="calendar-day is-today" role="gridcell"
-                                        aria-current="date">11<span class="event-dot dot-green" aria-label="Evento"
-                                            title="Evento"></span></span>
-                                    <span class="calendar-day" role="gridcell">12</span><span class="calendar-day"
-                                        role="gridcell">13</span><span class="calendar-day"
-                                        role="gridcell">14</span><span class="calendar-day" role="gridcell">15<span
-                                            class="event-dot dot-red" aria-label="Evento"
-                                            title="Evento"></span></span><span class="calendar-day"
-                                        role="gridcell">16</span><span class="calendar-day"
-                                        role="gridcell">17</span><span class="calendar-day" role="gridcell">18</span>
-                                    <span class="calendar-day" role="gridcell">19</span><span class="calendar-day"
-                                        role="gridcell">20</span><span class="calendar-day" role="gridcell">21<span
-                                            class="event-dot dot-violet" aria-label="Evento"
-                                            title="Evento"></span></span><span class="calendar-day"
-                                        role="gridcell">22</span><span class="calendar-day"
-                                        role="gridcell">23</span><span class="calendar-day"
-                                        role="gridcell">24</span><span class="calendar-day" role="gridcell">25</span>
-                                    <span class="calendar-day" role="gridcell">26</span><span class="calendar-day"
-                                        role="gridcell">27<span class="event-dot dot-teal" aria-label="Evento"
-                                            title="Evento"></span></span><span class="calendar-day"
-                                        role="gridcell">28</span><span class="calendar-day"
-                                        role="gridcell">29</span><span class="calendar-day"
-                                        role="gridcell">30</span><span class="calendar-day"
-                                        role="gridcell">31</span><span class="calendar-day is-empty" role="gridcell"
-                                        aria-hidden="true"></span>
+                                <div class="calendar-events-layout">
+                                    <div class="calendar-month-view" role="group" aria-label="Calendario de octubre de 2026">
+                                        <div class="calendar-weekday-row" aria-hidden="true">
+                                            <span class="calendar-weekday">Lu</span>
+                                            <span class="calendar-weekday">Ma</span>
+                                            <span class="calendar-weekday">Mi</span>
+                                            <span class="calendar-weekday">Ju</span>
+                                            <span class="calendar-weekday">Vi</span>
+                                            <span class="calendar-weekday weekend">Sá</span>
+                                            <span class="calendar-weekday weekend">Do</span>
+                                        </div>
+                                        <div class="calendar-weeks" id="calendarWeeks"></div>
+                                    </div>
+                                    <aside class="calendar-events" aria-labelledby="calendarEventsHeading">
+                                        <div class="calendar-events-heading">
+                                            <h3 id="calendarEventsHeading">Eventos de octubre</h3>
+                                            <button class="calendar-clear-selection" id="clearCalendarSelection"
+                                                type="button" disabled>Limpiar selección</button>
+                                        </div>
+                                        <div class="calendar-event-list" id="calendarEventList"></div>
+                                        <p class="visually-hidden" id="calendarSelectionStatus" aria-live="polite"></p>
+                                    </aside>
                                 </div>
                             </div>
                         </section>
