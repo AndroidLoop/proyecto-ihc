@@ -144,7 +144,7 @@ input:focus-visible {
 }
 
 .img-logo-conest {
-    height: 46px;
+    height: 5rem;
     width: auto;
     object-fit: contain;
     transition: transform var(--transition-fast);
@@ -165,6 +165,7 @@ input:focus-visible {
     color: var(--color-white);
     line-height: 1.2;
     letter-spacing: -0.02em;
+    border-bottom: 2px solid rgba(255, 153, 0, 1);
 }
 
 .portal-subtitle {
@@ -1037,7 +1038,7 @@ input:focus-visible {
     }
 
     .img-logo-conest {
-        height: 38px;
+        height: 4.5rem;
     }
 
     .img-logo-ucv {
