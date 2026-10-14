@@ -1227,6 +1227,29 @@ input:focus-visible {
     font-size: 0.8rem;
 }
 
+.profile-course {
+    width: 100%;
+    margin-top: 0.85rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-slate-200);
+}
+
+.profile-course-label {
+    color: var(--color-slate-500);
+    font-size: 0.68rem;
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+}
+
+.profile-course-name {
+    margin-top: 0.25rem;
+    color: var(--color-slate-800);
+    font-size: 0.78rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
 .profile-account-link {
     margin-top: 0.8rem;
     color: var(--color-primary-light);
@@ -1445,6 +1468,10 @@ input:focus-visible {
 
 .semester-panel-heading h2 { margin-top: 0.15rem; color: var(--color-slate-900); font-size: 1rem; }
 .semester-period { padding: 0.25rem 0.55rem; color: var(--color-slate-600); background: var(--color-slate-100); border-radius: var(--radius-sm); font-size: 0.72rem; margin-left: 0.55rem;}
+.schedule-filters { display: flex; align-items: center; gap: 0.85rem; margin-top: 0.65rem; }
+.schedule-filter-group { display: flex; align-items: center; gap: 0.4rem; color: var(--color-slate-600); font-size: 0.72rem; }
+.schedule-filter-select { min-width: 0; padding: 0.35rem 0.5rem; color: var(--color-slate-700); background: var(--color-white); border: 1px solid var(--color-slate-300); border-radius: 3px; font: inherit; font-size: 0.75rem; }
+.schedule-filter-select:focus-visible { outline: 2px solid var(--color-primary-light); outline-offset: 2px; }
 .semester-heading-actions { display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; flex-shrink: 0; }
 .schedule-card-actions { display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; }
 .schedule-card-actions[hidden],
@@ -1482,6 +1509,7 @@ input:focus-visible {
 .semester-schedule thead th:first-child { width: 92px; }
 .semester-schedule .schedule-time { width: 92px; padding: 0.5rem; color: var(--color-slate-600); background: #f8f9fa; font-size: 0.68rem; font-weight: var(--font-weight-semibold); text-align: left; vertical-align: middle; }
 .semester-schedule .schedule-cell { height: 132px; min-width: 0; padding: 0; vertical-align: top; }
+.semester-schedule .schedule-empty-state { height: 8rem; padding: 1.5rem; color: var(--color-slate-500); background: #f8f9fa; text-align: center; vertical-align: middle; }
 .student-count-value { height: 2.6rem; padding: 0.45rem; background-color: var(--color-slate-300); text-align: center; vertical-align: middle; }
 .student-count-value.is-free { background-color: #caffd5; }
 .student-count-link { color: inherit; text-underline-offset: 2px; }
@@ -1572,8 +1600,9 @@ input:focus-visible {
     .dashboard-grid { grid-template-columns: minmax(0, 1fr); }
     .profile-panel { min-height: 0; display: grid; grid-template-columns: 52px minmax(0, 1fr); column-gap: 0.8rem; align-items: center; text-align: left; }
     .profile-topline { grid-column: 1 / -1; }
-    .profile-avatar { width: 52px; grid-row: 2 / span 4; margin: 0.7rem 0; }
+    .profile-avatar { width: 52px; grid-row: 2 / span 3; margin: 0.7rem 0; }
     .profile-role, .profile-name, .profile-id, .profile-account-link { justify-self: start; margin-top: 0; }
+    .profile-course { grid-column: 1 / -1; margin-top: 0.65rem; }
     .profile-logout { grid-column: 1 / -1; margin-top: 0.8rem; }
     .workspace-tools { align-items: center; flex-direction: row; gap: 0.5rem; }
     .workspace-search { width: 100%; }
@@ -1586,6 +1615,9 @@ input:focus-visible {
     .semester-panel { min-height: 220px; }
     .semester-panel-heading { align-items: flex-start; flex-wrap: wrap; }
     .semester-panel-heading > div:first-child { min-width: 0; }
+    .schedule-filters { flex-wrap: wrap; gap: 0.6rem 0.85rem; }
+    .schedule-filter-group { align-items: flex-start; flex-direction: column; gap: 0.25rem; }
+    .schedule-filter-select { width: 100%; }
     .semester-heading-actions { width: 100%; flex-wrap: wrap; justify-content: flex-start; }
     .schedule-card-actions { flex-wrap: wrap; justify-content: flex-start; }
 }

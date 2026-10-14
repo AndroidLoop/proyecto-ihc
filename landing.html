@@ -135,6 +135,10 @@
                         <p class="profile-role">Módulo Docente</p>
                         <h3 class="profile-name" id="profileHeading">PETRONILO PEDRO</h3>
                         <p class="profile-id">V-9999999</p>
+                        <div class="profile-course">
+                            <span class="profile-course-label">Curso asignado</span>
+                            <p class="profile-course-name">Organización y Estructura del Computador II</p>
+                        </div>
                         <a class="profile-logout" href="index.html"><svg width="17" height="17" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" aria-hidden="true">
@@ -198,7 +202,22 @@
                                 <div>
                                     <h2 id="semesterHeading">Semestre Actual <span
                                             class="semester-period">01-2026</span></h2>
-                                    <p>Organización y Estructura del Computador II - Semestre 3 - Computación</p>
+                                    <div class="schedule-filters" role="group" aria-label="Filtros del horario">
+                                        <div class="schedule-filter-group">
+                                            <label for="semesterFilter">Semestre</label>
+                                            <select class="schedule-filter-select" id="semesterFilter" name="semester">
+                                                <option value="1">Semestre 1</option>
+                                                <option value="3" selected>Semestre 3</option>
+                                            </select>
+                                        </div>
+                                        <div class="schedule-filter-group">
+                                            <label for="careerFilter">Carrera</label>
+                                            <select class="schedule-filter-select" id="careerFilter" name="career">
+                                                <option value="computacion" selected>Computación</option>
+                                                <option value="quimica">Química</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="semester-heading-actions">
                                     <button class="schedule-action-button" id="toggleStudentCountView" type="button"

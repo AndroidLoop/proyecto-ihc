@@ -13,7 +13,343 @@ document.addEventListener('DOMContentLoaded', () => {
     initSemesterSchedule();
 });
 
-const semesterSchedule = {
+const createSections = (records) => records.map(([name, teacher, room]) => ({ name, teacher, room }));
+
+const computacionOneSections = {
+    discreteMonday: createSections([
+        ['C1P', 'FORCUCCI MARIA', 'Aula 14'],
+        ['C2P', 'VILLEGAS BERTHA', 'Aula 28'],
+        ['C3P', 'FIGUEROA CARLOS', 'Aula 06'],
+        ['C4P', 'FERNANDEZ YULIANA', 'Aula 29'],
+        ['C5P', 'PERDOMO MARIELA', 'Aula 21'],
+        ['C6P', 'CARRIZO GABRIEL', 'Aula 13']
+    ]),
+    discreteWednesday: createSections([
+        ['C1P', 'FORCUCCI MARIA', 'Aula 16'],
+        ['C2P', 'VILLEGAS BERTHA', 'Aula 13'],
+        ['C3P', 'FIGUEROA CARLOS', 'Aula 06'],
+        ['C4P', 'FERNANDEZ YULIANA', 'Aula 10'],
+        ['C5P', 'PERDOMO MARIELA', 'Aula 25'],
+        ['C6P', 'CARRIZO GABRIEL', 'Aula 27']
+    ]),
+    discreteFriday: createSections([
+        ['C1P', 'FORCUCCI MARIA', 'Aula 17'],
+        ['C2P', 'VILLEGAS BERTHA', 'Aula 27'],
+        ['C3P', 'FIGUEROA CARLOS', 'Aula 08'],
+        ['C4P', 'FERNANDEZ YULIANA', 'Aula 16'],
+        ['C5P', 'PERDOMO MARIELA', 'Aula 09'],
+        ['C6P', 'CARRIZO GABRIEL', 'Aula 05']
+    ]),
+    discreteThursday: createSections([
+        ['C5P', 'PERDOMO MARIELA', 'Aula 24'],
+        ['C6P', 'CARRIZO GABRIEL', 'Aula 26']
+    ]),
+    mathOneEarlyMonday: createSections([
+        ['U1', 'ALFONZO MARIANNY', 'Aula 06'],
+        ['U2', 'FLORES JOSE', 'Aula 26'],
+        ['U3', 'OSUNA MARY', 'Aula 30']
+    ]),
+    mathOneEarlyThursday: createSections([
+        ['U1', 'ALFONZO MARIANNY', 'Aula 22'],
+        ['U2', 'FLORES JOSE', 'Aula 14'],
+        ['U3', 'OSUNA MARY', 'Aula 30']
+    ]),
+    mathOneMiddleMonday: createSections([
+        ['U4', 'PAEZ JESUS', 'Aula 17'],
+        ['U5', 'AZUAJE OSWALDO', 'Aula 07']
+    ]),
+    mathOneMiddleTuesday: createSections([
+        ['U4', 'PAEZ JESUS', 'Aula 06'],
+        ['U5', 'AZUAJE OSWALDO', 'Aula 17']
+    ]),
+    mathOneMiddleWednesday: createSections([
+        ['U4', 'PAEZ JESUS', 'Aula 06'],
+        ['U5', 'AZUAJE OSWALDO', 'Aula 07']
+    ]),
+    mathOneMiddleThursday: createSections([
+        ['U4', 'PAEZ JESUS', 'Aula 06'],
+        ['U5', 'AZUAJE OSWALDO', 'Aula 17']
+    ]),
+    mathOneAfternoonMonday: createSections([
+        ['U10', 'AULAR MARIA', 'Aula 17'],
+        ['U6', 'CENTENO LORENZO', 'Aula 09'],
+        ['U7', 'LOPEZ MAXIMILIANO', 'Aula 10'],
+        ['U8', 'RANGEL EZEQUIEL', 'Aula 07'],
+        ['U9', 'CARRENO ARTURO', 'Aula 27']
+    ]),
+    mathOneAfternoonTuesday: createSections([
+        ['U10', 'AULAR MARIA', 'Aula 17'],
+        ['U6', 'CENTENO LORENZO', 'Aula 09'],
+        ['U7', 'LOPEZ MAXIMILIANO', 'Aula 10'],
+        ['U8', 'RANGEL EZEQUIEL', 'Aula 07'],
+        ['U9', 'CARRENO ARTURO', 'Aula 16']
+    ]),
+    mathOneAfternoonWednesday: createSections([
+        ['U10', 'AULAR MARIA', 'Aula 17'],
+        ['U6', 'CENTENO LORENZO', 'Aula 09'],
+        ['U7', 'LOPEZ MAXIMILIANO', 'Aula 10'],
+        ['U8', 'RANGEL EZEQUIEL', 'Aula 07'],
+        ['U9', 'CARRENO ARTURO', 'Aula 27']
+    ]),
+    mathOneAfternoonThursday: createSections([
+        ['U10', 'AULAR MARIA', 'Aula 17'],
+        ['U6', 'CENTENO LORENZO', 'Aula 09'],
+        ['U7', 'LOPEZ MAXIMILIANO', 'Aula 10'],
+        ['U8', 'RANGEL EZEQUIEL', 'Aula 08'],
+        ['U9', 'CARRENO ARTURO', 'Aula 27']
+    ]),
+    informaticaFridayMorning: createSections([
+        ['C1L', 'DIAZ ROSSANA', 'Aula 05'],
+        ['C2P', 'DIAZ MARIA', 'Aula 05'],
+        ['C3P', 'RANGEL WILFREDO', 'Aula 09'],
+        ['C4P', 'RODRIGUEZ HONORIO', 'Aula 21']
+    ]),
+    informaticaFridayMidday: createSections([
+        ['C1L', 'DIAZ ROSSANA', 'Aula 05'],
+        ['C2P', 'DIAZ MARIA', 'Aula 05'],
+        ['C3P', 'RANGEL WILFREDO', 'Aula 08'],
+        ['C4P', 'RODRIGUEZ HONORIO', 'Aula 21']
+    ]),
+    informaticaThursday: createSections([
+        ['C1L', 'DIAZ ROSSANA', 'Aula 05'],
+        ['C2P', 'DIAZ MARIA', 'Aula 10'],
+        ['C3P', 'RANGEL WILFREDO', 'Aula 08'],
+        ['C4P', 'RODRIGUEZ HONORIO', 'Aula 09']
+    ]),
+    algorithmsWednesday: createSections([
+        ['C1P', 'BERENGUER MOISES ELIAS', 'Aula 06'],
+        ['C2P', 'QUINTERO JOHAN', 'Aula 08'],
+        ['C3P', 'ISAAC MARCEL', 'Aula 17'],
+        ['C4P', 'MENDOZA LEONARDO', 'Aula 24'],
+        ['C5P', 'HERNANDEZ DAVID', 'Aula 05'],
+        ['C6P', 'BELISARIO GABRIEL', 'Aula 07'],
+        ['C7P', 'FLORES IVAN', 'Aula 09']
+    ]),
+    algorithmsFriday: createSections([
+        ['C1P', 'BERENGUER MOISES ELIAS', 'Aula 06'],
+        ['C2P', 'QUINTERO JOHAN', 'Aula 26'],
+        ['C3P', 'ISAAC MARCEL', 'Aula 17'],
+        ['C4P', 'MENDOZA LEONARDO', 'Aula 27'],
+        ['C5P', 'HERNANDEZ DAVID', 'Aula 05'],
+        ['C6P', 'BELISARIO GABRIEL', 'Aula 07'],
+        ['C7P', 'FLORES IVAN', 'Aula 09']
+    ])
+};
+
+const quimicaOneSections = {
+    mathOneEarlyMonday: createSections([
+        ['U1', 'ALFONZO MARIANNY', 'Aula 06'],
+        ['U2', 'FLORES JOSE', 'Aula 26'],
+        ['U3', 'OSUNA MARY', 'Aula 30']
+    ]),
+    mathOneEarlyTuesday: createSections([
+        ['U1', 'ALFONZO MARIANNY', 'Aula 14'],
+        ['U2', 'FLORES JOSE', 'Aula 26'],
+        ['U3', 'OSUNA MARY', 'Aula 26']
+    ]),
+    mathOneEarlyWednesday: createSections([
+        ['U1', 'ALFONZO MARIANNY', 'Aula 16'],
+        ['U2', 'FLORES JOSE', 'Aula 26'],
+        ['U3', 'OSUNA MARY', 'Aula 26']
+    ]),
+    mathOneEarlyThursday: createSections([
+        ['U1', 'ALFONZO MARIANNY', 'Aula 22'],
+        ['U2', 'FLORES JOSE', 'Aula 14'],
+        ['U3', 'OSUNA MARY', 'Aula 30']
+    ]),
+    principlesMonday: createSections([
+        ['U1', 'BASTIDAS ELSY', 'Aula 23'],
+        ['U2', 'CAIGUA AMERICA', 'Aula 16'],
+        ['U3', 'BULLON MARY', 'Aula 08'],
+        ['U4', 'ORTEGA SINAI', 'Aula 22'],
+        ['U5', 'MUÑOZ MARIA', 'Aula 14']
+    ]),
+    principlesWednesday: createSections([
+        ['U1', 'BASTIDAS ELSY', 'Aula 16'],
+        ['U2', 'CAIGUA AMERICA', 'Aula 16'],
+        ['U3', 'BULLON MARY', 'Aula 17'],
+        ['U4', 'ORTEGA SINAI', 'Aula 08'],
+        ['U5', 'MUÑOZ MARIA', 'Aula 27']
+    ]),
+    principlesFriday: createSections([
+        ['U1', 'BASTIDAS ELSY', 'Aula 27'],
+        ['U2', 'CAIGUA AMERICA', 'Aula 14'],
+        ['U3', 'BULLON MARY', 'Aula 10'],
+        ['U4', 'ORTEGA SINAI', 'Aula 08'],
+        ['U5', 'MUÑOZ MARIA', 'Aula 17']
+    ]),
+    physicsTuesday: createSections([
+        ['U1', 'CLARIZIO VICTOR', 'Aula 14'],
+        ['U2', 'BITTARA SIMON', 'Aula 23'],
+        ['U3', 'RODRIGUEZ JONATHAN', 'Aula 22']
+    ]),
+    physicsWednesday: createSections([
+        ['U1', 'CLARIZIO VICTOR', 'Aula 16'],
+        ['U2', 'BITTARA SIMON', 'Aula 14'],
+        ['U3', 'RODRIGUEZ JONATHAN', 'Aula 23']
+    ]),
+    physicsThursday: createSections([
+        ['U1', 'CLARIZIO VICTOR', 'Aula 14'],
+        ['U2', 'BITTARA SIMON', 'Aula 23'],
+        ['U3', 'RODRIGUEZ JONATHAN', 'Aula 22']
+    ]),
+    physicsFriday: createSections([
+        ['U1', 'CLARIZIO VICTOR', 'Aula 16'],
+        ['U2', 'BITTARA SIMON', 'Aula 17'],
+        ['U3', 'RODRIGUEZ JONATHAN', 'Aula 22']
+    ]),
+    physicsAfternoon: createSections([
+        ['U4', 'MUJICA ROSA', 'Aula 30'],
+        ['U5', 'MARTINEZ HEIDI', 'Aula 22']
+    ])
+};
+
+const semesterSchedules = {
+    'computacion-1': {
+        days: [
+            { key: 'monday', label: 'Lunes' },
+            { key: 'tuesday', label: 'Martes' },
+            { key: 'wednesday', label: 'Miércoles' },
+            { key: 'thursday', label: 'Jueves' },
+            { key: 'friday', label: 'Viernes' }
+        ],
+        slots: [
+            {
+                time: '07:00 - 09:00',
+                entries: {
+                    monday: [
+                        { code: '6110', sections: computacionOneSections.discreteMonday },
+                        { code: '8206', sections: computacionOneSections.mathOneEarlyMonday }
+                    ],
+                    tuesday: [{ code: '8206', sections: computacionOneSections.mathOneEarlyMonday }],
+                    wednesday: [
+                        { code: '6110', sections: computacionOneSections.discreteWednesday },
+                        { code: '8206', sections: computacionOneSections.mathOneEarlyMonday }
+                    ],
+                    thursday: [{ code: '8206', sections: computacionOneSections.mathOneEarlyThursday }],
+                    friday: [{ code: '6110', sections: computacionOneSections.discreteFriday }]
+                }
+            },
+            {
+                time: '09:00 - 11:00',
+                entries: {
+                    monday: [{ code: '8206', sections: computacionOneSections.mathOneMiddleMonday }],
+                    tuesday: [{ code: '8206', sections: computacionOneSections.mathOneMiddleTuesday }],
+                    wednesday: [{ code: '8206', sections: computacionOneSections.mathOneMiddleWednesday }],
+                    thursday: [{ code: '8206', sections: computacionOneSections.mathOneMiddleThursday }],
+                    friday: [{ code: '6301', sections: computacionOneSections.informaticaFridayMorning }]
+                }
+            },
+            {
+                time: '11:00 - 12:00',
+                entries: {
+                    thursday: [{ code: '6110', sections: computacionOneSections.discreteThursday }],
+                    friday: [{ code: '6301', sections: computacionOneSections.informaticaFridayMidday }]
+                }
+            },
+            {
+                time: '12:00 - 13:00',
+                entries: {
+                    thursday: [{ code: '6110', sections: computacionOneSections.discreteThursday }]
+                }
+            },
+            {
+                time: '13:00 - 14:00',
+                entries: {
+                    monday: [{ code: '8206', sections: computacionOneSections.mathOneAfternoonMonday }],
+                    tuesday: [{ code: '8206', sections: computacionOneSections.mathOneAfternoonTuesday }],
+                    wednesday: [{ code: '8206', sections: computacionOneSections.mathOneAfternoonWednesday }],
+                    thursday: [{ code: '8206', sections: computacionOneSections.mathOneAfternoonThursday }]
+                }
+            },
+            {
+                time: '14:00 - 15:00',
+                entries: {
+                    monday: [{ code: '8206', sections: computacionOneSections.mathOneAfternoonMonday }],
+                    tuesday: [{ code: '8206', sections: computacionOneSections.mathOneAfternoonTuesday }],
+                    wednesday: [{ code: '8206', sections: computacionOneSections.mathOneAfternoonWednesday }],
+                    thursday: [{ code: '8206', sections: computacionOneSections.mathOneAfternoonThursday }],
+                    friday: [{ code: '6201', sections: computacionOneSections.algorithmsFriday }]
+                }
+            },
+            {
+                time: '15:00 - 16:00',
+                entries: {
+                    wednesday: [{ code: '6201', sections: computacionOneSections.algorithmsWednesday }],
+                    thursday: [{ code: '6301', sections: computacionOneSections.informaticaThursday }],
+                    friday: [{ code: '6201', sections: computacionOneSections.algorithmsFriday }]
+                }
+            },
+            {
+                time: '16:00 - 17:00',
+                entries: {
+                    wednesday: [{ code: '6201', sections: computacionOneSections.algorithmsWednesday }],
+                    thursday: [{ code: '6301', sections: computacionOneSections.informaticaThursday }]
+                }
+            }
+        ]
+    },
+    'quimica-1': {
+        days: [
+            { key: 'monday', label: 'Lunes' },
+            { key: 'tuesday', label: 'Martes' },
+            { key: 'wednesday', label: 'Miércoles' },
+            { key: 'thursday', label: 'Jueves' },
+            { key: 'friday', label: 'Viernes' }
+        ],
+        slots: [
+            {
+                time: '07:00 - 09:00',
+                entries: {
+                    monday: [{ code: '8206', sections: quimicaOneSections.mathOneEarlyMonday }],
+                    tuesday: [{ code: '8206', sections: quimicaOneSections.mathOneEarlyTuesday }],
+                    wednesday: [{ code: '8206', sections: quimicaOneSections.mathOneEarlyWednesday }],
+                    thursday: [{ code: '8206', sections: quimicaOneSections.mathOneEarlyThursday }]
+                }
+            },
+            {
+                time: '09:00 - 11:00',
+                entries: {
+                    monday: [{ code: '3401', sections: quimicaOneSections.principlesMonday }],
+                    tuesday: [{ code: '8206', sections: computacionOneSections.mathOneMiddleTuesday }],
+                    wednesday: [
+                        { code: '3401', sections: quimicaOneSections.principlesWednesday },
+                        { code: '8206', sections: computacionOneSections.mathOneMiddleWednesday }
+                    ],
+                    thursday: [{ code: '8206', sections: computacionOneSections.mathOneMiddleThursday }],
+                    friday: [{ code: '3401', sections: quimicaOneSections.principlesFriday }]
+                }
+            },
+            {
+                time: '11:00 - 13:00',
+                entries: {
+                    tuesday: [{ code: '2106', sections: quimicaOneSections.physicsTuesday }],
+                    wednesday: [{ code: '2106', sections: quimicaOneSections.physicsWednesday }],
+                    thursday: [{ code: '2106', sections: quimicaOneSections.physicsThursday }],
+                    friday: [{ code: '2106', sections: quimicaOneSections.physicsFriday }]
+                }
+            },
+            {
+                time: '13:00 - 15:00',
+                entries: {
+                    monday: [{ code: '8206', sections: computacionOneSections.mathOneAfternoonMonday }],
+                    tuesday: [{ code: '8206', sections: computacionOneSections.mathOneAfternoonTuesday }],
+                    wednesday: [{ code: '8206', sections: computacionOneSections.mathOneAfternoonWednesday }],
+                    thursday: [{ code: '8206', sections: computacionOneSections.mathOneAfternoonThursday }]
+                }
+            },
+            {
+                time: '15:00 - 17:00',
+                entries: {
+                    tuesday: [{ code: '2106', sections: quimicaOneSections.physicsAfternoon }],
+                    wednesday: [{ code: '2106', sections: quimicaOneSections.physicsAfternoon }],
+                    thursday: [{ code: '2106', sections: quimicaOneSections.physicsAfternoon }],
+                    friday: [{ code: '2106', sections: quimicaOneSections.physicsAfternoon }]
+                }
+            }
+        ]
+    },
+    'computacion-3': {
     days: [
         { key: 'monday', label: 'Lunes' },
         { key: 'tuesday', label: 'Martes' },
@@ -120,14 +456,21 @@ const semesterSchedule = {
             }
         }
     ]
+    }
 };
 
 const semesterCourses = {
     '0030': { name: 'INGLES I', color: 'gray' },
     '0511': { name: 'FUNDAMENTOS DE BIOÉTICA', color: 'blue' },
+    '2106': { name: 'FÍSICA GENERAL I', color: 'blue' },
+    '3401': { name: 'PRINCIPIOS QUÍMICA I', color: 'cyan' },
     '6002': { name: 'ORG.Y ESTRUCT.DEL COMP.II', color: 'cyan' },
     '6108': { name: 'MATEMATICAS DISCRETAS III', color: 'amber' },
+    '6110': { name: 'MATEMÁTICAS DISCRETAS I', color: 'blue' },
     '6203': { name: 'INGENIERIA DE SOFTWARE', color: 'gray' },
+    '6201': { name: 'ALGORITMOS Y PROGRAMACIÓN', color: 'cyan' },
+    '6301': { name: 'INTROD. A LA INFORMÁTICA', color: 'peach' },
+    '8206': { name: 'MATEMÁTICA I', color: 'gray' },
     '8208': { name: 'MATEMATICA III', color: 'peach' }
 };
 
@@ -150,36 +493,27 @@ function initSemesterSchedule() {
     const tableBody = document.getElementById('semesterScheduleBody');
     if (!tableBody) return;
 
-    semesterSchedule.slots.forEach((slot, slotIndex) => {
-        const row = document.createElement('tr');
-        const timeHeader = document.createElement('th');
-        timeHeader.scope = 'row';
-        timeHeader.className = 'schedule-time';
-        timeHeader.textContent = slot.time;
-        row.append(timeHeader);
+    const semesterFilter = document.getElementById('semesterFilter');
+    const careerFilter = document.getElementById('careerFilter');
+    const chemistryOption = careerFilter && careerFilter.querySelector('option[value="quimica"]');
+    const updateCareerAvailability = () => {
+        const computerScienceOnly = semesterFilter && semesterFilter.value === '3';
+        if (chemistryOption) chemistryOption.hidden = computerScienceOnly;
+        if (computerScienceOnly && careerFilter.value !== 'computacion') {
+            careerFilter.value = 'computacion';
+        }
+    };
+    const renderSelectedSchedule = () => {
+        updateCareerAvailability();
+        const career = careerFilter ? careerFilter.value : 'computacion';
+        const semester = semesterFilter ? semesterFilter.value : '3';
+        closeExpandedScheduleCard();
+        renderSemesterSchedule(semesterSchedules[`${career}-${semester}`], tableBody);
+    };
 
-        semesterSchedule.days.forEach((day) => {
-            const cell = document.createElement('td');
-            cell.className = 'schedule-cell';
-            cell.setAttribute('aria-label', `${day.label}, ${slot.time}`);
-
-            const cardGrid = document.createElement('div');
-            cardGrid.className = 'schedule-card-grid';
-            const entries = (slot.entries[day.key] || []).slice(0, 4);
-            if (entries.length === 1) cardGrid.classList.add('has-one-card');
-            if (entries.length === 2) cardGrid.classList.add('has-two-cards');
-            entries.forEach((entry, entryIndex) => {
-                const card = createScheduleCard(entry, slot.time, slotIndex, day.key, entryIndex);
-                cardGrid.append(card);
-                if (entries.length === 1) setScheduleCardExpanded(card, true);
-            });
-
-            cell.append(cardGrid);
-            row.append(cell);
-        });
-
-        tableBody.append(row);
-    });
+    renderSelectedSchedule();
+    if (semesterFilter) semesterFilter.addEventListener('change', renderSelectedSchedule);
+    if (careerFilter) careerFilter.addEventListener('change', renderSelectedSchedule);
 
     const countTableBody = document.getElementById('studentCountScheduleBody');
     const courseSchedule = document.getElementById('semesterSchedule');
@@ -267,6 +601,52 @@ function initSemesterSchedule() {
 
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') closeExpandedScheduleCard(true);
+    });
+}
+
+function renderSemesterSchedule(schedule, tableBody) {
+    tableBody.replaceChildren();
+
+    if (!schedule) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.className = 'schedule-empty-state';
+        cell.colSpan = 6;
+        cell.textContent = 'El horario de esta combinación aún no está disponible.';
+        row.append(cell);
+        tableBody.append(row);
+        return;
+    }
+
+    schedule.slots.forEach((slot, slotIndex) => {
+        const row = document.createElement('tr');
+        const timeHeader = document.createElement('th');
+        timeHeader.scope = 'row';
+        timeHeader.className = 'schedule-time';
+        timeHeader.textContent = slot.time;
+        row.append(timeHeader);
+
+        schedule.days.forEach((day) => {
+            const cell = document.createElement('td');
+            cell.className = 'schedule-cell';
+            cell.setAttribute('aria-label', `${day.label}, ${slot.time}`);
+
+            const cardGrid = document.createElement('div');
+            cardGrid.className = 'schedule-card-grid';
+            const entries = (slot.entries[day.key] || []).slice(0, 4);
+            if (entries.length === 1) cardGrid.classList.add('has-one-card');
+            if (entries.length === 2) cardGrid.classList.add('has-two-cards');
+            entries.forEach((entry, entryIndex) => {
+                const card = createScheduleCard(entry, slot.time, slotIndex, day.key, entryIndex);
+                cardGrid.append(card);
+                if (entries.length === 1) setScheduleCardExpanded(card, true);
+            });
+
+            cell.append(cardGrid);
+            row.append(cell);
+        });
+
+        tableBody.append(row);
     });
 }
 
