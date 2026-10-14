@@ -202,7 +202,8 @@
                                 <div>
                                     <h2 id="semesterHeading">Semestre Actual <span
                                             class="semester-period">01-2026</span></h2>
-                                    <div class="schedule-filters" role="group" aria-label="Filtros del horario">
+                                    <div class="schedule-filters" id="courseScheduleFilters" role="group"
+                                        aria-label="Filtros del horario">
                                         <div class="schedule-filter-group">
                                             <label for="semesterFilter">Semestre</label>
                                             <select class="schedule-filter-select" id="semesterFilter" name="semester">
@@ -218,10 +219,21 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="schedule-filters" id="sectionScheduleFilters" role="group"
+                                        aria-label="Filtro por sección" hidden>
+                                        <div class="schedule-filter-group">
+                                            <label for="sectionFilter">Sección</label>
+                                            <select class="schedule-filter-select" id="sectionFilter" name="section">
+                                                <option value="C1P" selected>C1P</option>
+                                                <option value="C2P">C2P</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="semester-heading-actions">
                                     <button class="schedule-action-button" id="toggleStudentCountView" type="button"
-                                        aria-controls="semesterSchedule studentCountSchedule" aria-pressed="false">
+                                        aria-controls="semesterSchedule studentCountSchedule courseScheduleFilters sectionScheduleFilters"
+                                        aria-pressed="false">
                                         <span>Estudiantes por Horario</span>
                                     </button>
                                     <div class="schedule-card-actions" id="scheduleCardActions">

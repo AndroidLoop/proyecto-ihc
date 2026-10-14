@@ -521,33 +521,56 @@ function initSemesterSchedule() {
     const scheduleViewport = document.getElementById('semesterScheduleViewport');
     const countViewToggle = document.getElementById('toggleStudentCountView');
     const cardActions = document.getElementById('scheduleCardActions');
-    if (!countTableBody || !courseSchedule || !countSchedule || !scheduleViewport || !countViewToggle || !cardActions) return;
+    const courseFilters = document.getElementById('courseScheduleFilters');
+    const sectionFilters = document.getElementById('sectionScheduleFilters');
+    const sectionFilter = document.getElementById('sectionFilter');
+    if (!countTableBody || !courseSchedule || !countSchedule || !scheduleViewport
+        || !countViewToggle || !cardActions || !courseFilters || !sectionFilters || !sectionFilter) return;
 
-    studentCountsByTime.forEach((timeSlot) => {
-        const row = document.createElement('tr');
-        const timeHeader = document.createElement('th');
-        timeHeader.scope = 'row';
-        timeHeader.className = 'schedule-time';
-        timeHeader.textContent = timeSlot.time;
-        row.append(timeHeader);
+    let c2pStudentCountsByTime;
+    const getStudentCountsForSection = (section) => {
+        if (section === 'C1P') return studentCountsByTime;
+        if (!c2pStudentCountsByTime) {
+            c2pStudentCountsByTime = studentCountsByTime.map((timeSlot) => ({
+                time: timeSlot.time,
+                counts: timeSlot.counts.map((count) => count === 'LIBRE'
+                    ? count
+                    : String(Math.floor(Math.random() * 73) + 1))
+            }));
+        }
+        return c2pStudentCountsByTime;
+    };
 
-        timeSlot.counts.forEach((count) => {
-            const cell = document.createElement('td');
-            cell.className = 'student-count-value';
-            if (count === 'LIBRE') {
-                cell.classList.add('is-free');
-                cell.textContent = count;
-            } else {
-                const link = document.createElement('a');
-                link.href = '#';
-                link.className = 'student-count-link';
-                link.textContent = count;
-                cell.append(link);
-            }
-            row.append(cell);
+    const renderStudentCounts = () => {
+        countTableBody.replaceChildren();
+        getStudentCountsForSection(sectionFilter.value).forEach((timeSlot) => {
+            const row = document.createElement('tr');
+            const timeHeader = document.createElement('th');
+            timeHeader.scope = 'row';
+            timeHeader.className = 'schedule-time';
+            timeHeader.textContent = timeSlot.time;
+            row.append(timeHeader);
+
+            timeSlot.counts.forEach((count) => {
+                const cell = document.createElement('td');
+                cell.className = 'student-count-value';
+                if (count === 'LIBRE') {
+                    cell.classList.add('is-free');
+                    cell.textContent = count;
+                } else {
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.className = 'student-count-link';
+                    link.textContent = count;
+                    cell.append(link);
+                }
+                row.append(cell);
+            });
+            countTableBody.append(row);
         });
-        countTableBody.append(row);
-    });
+    };
+    renderStudentCounts();
+    sectionFilter.addEventListener('change', renderStudentCounts);
 
     countTableBody.addEventListener('click', (event) => {
         if (event.target.closest('.student-count-link')) event.preventDefault();
@@ -561,6 +584,8 @@ function initSemesterSchedule() {
             : 'Estudiantes por Horario';
         courseSchedule.hidden = showCountSchedule;
         countSchedule.hidden = !showCountSchedule;
+        courseFilters.hidden = showCountSchedule;
+        sectionFilters.hidden = !showCountSchedule;
         cardActions.hidden = showCountSchedule;
         scheduleViewport.setAttribute(
             'aria-label',
@@ -568,7 +593,10 @@ function initSemesterSchedule() {
                 ? 'Cantidad de estudiantes por día y hora; desplazamiento horizontal disponible'
                 : 'Horario semanal; desplazamiento horizontal disponible'
         );
-        if (showCountSchedule) closeExpandedScheduleCard();
+        if (showCountSchedule) {
+            renderStudentCounts();
+            closeExpandedScheduleCard();
+        }
     });
 
     tableBody.addEventListener('click', (event) => {
